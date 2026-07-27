@@ -13,5 +13,7 @@
 ## 当前材料
 
 - [产品需求文档](../01-Product/PRD.md)
+- [前端需求规格](../01-Product/Frontend_Requirements_Specification.md)
+- [实施、发布与验收清单](../01-Product/Implementation_and_Acceptance_Checklists.md)
 - [欠薪信息采集规范](../01-Product/Wage_Arrears_Intake_Schema.md)
 - [10 个测试场景](Test_Cases.md)

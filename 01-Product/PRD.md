@@ -1,5 +1,9 @@
 # PRD：AI 劳动纠纷助手
 
+> 本 PRD 定义第一个欠薪模块。产品长期采用“通用法律入口 + 逐领域专业模块”的结构，
+> 详细战略见 [全球产品战略与执行计划](../00-Vision/Global_Product_Strategy_and_Execution_Plan.md)，
+> 页面级要求见 [前端需求规格](Frontend_Requirements_Specification.md)。
+
 ## 1. 产品目标
 
 帮助普通劳动者通过引导式对话整理劳动纠纷事实与证据，形成可阅读、可核对、可交给律师的初步材料，并获得带风险提示的下一步行动建议。
@@ -71,3 +75,5 @@
 
 - [欠薪案件信息采集规范](Wage_Arrears_Intake_Schema.md)
 - [欠薪 MVP 测试场景](../05-MVP/Test_Cases.md)
+- [前端需求规格](Frontend_Requirements_Specification.md)
+- [实施、发布与验收清单](Implementation_and_Acceptance_Checklists.md)

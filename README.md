@@ -34,14 +34,22 @@ AI-powered legal assistance platform research and development project.
 - `07-Partners`：律师与高校合作资源
 - `08-Research`：论文和研究记录
 
-战略与知识工程设计见 [00-Vision/Strategy_and_Knowledge_Engineering.md](00-Vision/Strategy_and_Knowledge_Engineering.md)。
+## 核心设计文档
+
+- [全球产品战略与详细执行计划](00-Vision/Global_Product_Strategy_and_Execution_Plan.md)
+- [全球 Legal AI 竞品与需求分析](06-Business/Global_Legal_AI_Competitive_Analysis.md)
+- [前端需求规格](01-Product/Frontend_Requirements_Specification.md)
+- [实施、发布与验收清单](01-Product/Implementation_and_Acceptance_Checklists.md)
+- [战略与知识工程设计](00-Vision/Strategy_and_Knowledge_Engineering.md)
+- [欠薪产品需求文档](01-Product/PRD.md)
 
 ## 近期里程碑
 
 1. 完成产品与知识库基线文档。
-2. 访谈劳动者和劳动法律师，验证高频问题。
-3. 定义最小可用知识集与评测集。
-4. 制作可测试的对话原型。
-5. 通过安全性与有效性评估后，再进入工程 Demo。
+2. 从官方公开来源建立欠薪知识包、来源登记和更新机制。
+3. 定义最小可用知识集与至少 30 个结构化评测场景。
+4. 制作可测试的用户端原型，并用模拟案件验证。
+5. 将可获得的用户反馈和法律专业复核作为补充验证。
+6. 通过安全性、有效性和隐私评估后进入受控工程 Demo。
 
 > 本项目当前输出仅用于法律信息与流程辅助，不构成正式法律意见。
