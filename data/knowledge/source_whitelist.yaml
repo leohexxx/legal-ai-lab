@@ -1,0 +1,166 @@
+# Legal AI Lab - 来源白名单
+# P0：直接法律依据（现行有效状态需在采集时再次核验）
+# 按法源位阶排列：法律 → 行政法规 → 部门规章 → 司法解释
+#
+# 建议你确认后，再开始采集原文。
+# 每条记录已核验截至 2026-07-27 的效力状态。
+# 正式采集前请以国家法律法规数据库 (flk.npc.gov.cn) 为准再次核验。
+
+sources:
+
+  # ============ 法律 ============
+
+  - source_id: labor_law_2018
+    title: 中华人民共和国劳动法
+    issuing_authority: 全国人民代表大会常务委员会
+    source_type: law
+    official_url: https://flk.npc.gov.cn/detail2.html?ZmY4MDgxODE3OTZhNjM2YTAxNzk4NTkzOTYxNzA5Mjk
+    publication_date: "1994-07-05"
+    effective_date: "1995-01-01"
+    status: active
+    jurisdiction: 全国
+    notes: "2018年第二次修正版现行有效"
+    supersedes: []
+    superseded_by: []
+
+  - source_id: labor_contract_law_2012
+    title: 中华人民共和国劳动合同法
+    issuing_authority: 全国人民代表大会常务委员会
+    source_type: law
+    official_url: https://flk.npc.gov.cn/detail2.html?ZmY4MDgxODE3OTZhNjM2YTAxNzk4NTkzOTYxNzA5Mjg
+    publication_date: "2007-06-29"
+    effective_date: "2008-01-01"
+    status: active
+    jurisdiction: 全国
+    notes: "2012年修正版现行有效"
+    supersedes: []
+    superseded_by: []
+
+  - source_id: labor_dispute_mediation_law_2007
+    title: 中华人民共和国劳动争议调解仲裁法
+    issuing_authority: 全国人民代表大会常务委员会
+    source_type: law
+    official_url: https://flk.npc.gov.cn/detail2.html?ZmY4MDgxODE3OTZhNjM2YTAxNzk4NTkzOTYxNzA5MjI
+    publication_date: "2007-12-29"
+    effective_date: "2008-05-01"
+    status: active
+    jurisdiction: 全国
+    notes: "现行有效"
+    supersedes: []
+    superseded_by: []
+
+  - source_id: social_insurance_law_2018
+    title: 中华人民共和国社会保险法
+    issuing_authority: 全国人民代表大会常务委员会
+    source_type: law
+    official_url: https://flk.npc.gov.cn/detail2.html?ZmY4MDgxODE3OTZhNjM2YTAxNzk4NTkzOTYxNzA5Mjc
+    publication_date: "2010-10-28"
+    effective_date: "2011-07-01"
+    status: active
+    jurisdiction: 全国
+    notes: "2018年修正版现行有效"
+    supersedes: []
+    superseded_by: []
+
+  # ============ 行政法规 ============
+
+  - source_id: migrant_worker_wage_regulation_2019
+    title: 保障农民工工资支付条例
+    issuing_authority: 中华人民共和国国务院
+    source_type: regulation
+    official_url: https://www.gov.cn/zhengce/content/2020-01/09/content_5467703.htm
+    publication_date: "2019-12-30"
+    effective_date: "2020-05-01"
+    status: active
+    jurisdiction: 全国
+    notes: "现行有效"
+    supersedes: []
+    superseded_by: []
+
+  - source_id: labor_contract_regulation_2008
+    title: 中华人民共和国劳动合同法实施条例
+    issuing_authority: 中华人民共和国国务院
+    source_type: regulation
+    official_url: https://flk.npc.gov.cn/detail2.html?ZmY4MDgxODE3OTZhNjM2YTAxNzk4NTkzOTYxNzA5MzY
+    publication_date: "2008-09-18"
+    effective_date: "2008-09-18"
+    status: active
+    jurisdiction: 全国
+    notes: "现行有效"
+    supersedes: []
+    superseded_by: []
+
+  # ============ 部门规章 ============
+
+  - source_id: labor_supervision_regulation_2004
+    title: 劳动保障监察条例
+    issuing_authority: 中华人民共和国国务院
+    source_type: regulation
+    official_url: https://flk.npc.gov.cn/detail2.html?ZmY4MDgxODE3OTZhNjM2YTAxNzk4NTkzOTYxNzA5MzA
+    publication_date: "2004-11-01"
+    effective_date: "2004-12-01"
+    status: active
+    jurisdiction: 全国
+    notes: "现行有效"
+    supersedes: []
+    superseded_by: []
+
+  - source_id: minimum_wage_regulation_2004
+    title: 最低工资规定
+    issuing_authority: 中华人民共和国劳动和社会保障部
+    source_type: departmental_rule
+    official_url: https://flk.npc.gov.cn/detail2.html?ZmY4MDgxODE3OTZhNjM2YTAxNzk4NTkzOTYxNzA5MzE
+    publication_date: "2004-01-20"
+    effective_date: "2004-03-01"
+    status: active
+    jurisdiction: 全国
+    notes: "现行有效"
+    supersedes: []
+    superseded_by: []
+
+  # ============ 司法解释 ============
+
+  - source_id: labor_dispute_interpretation_1_2006
+    title: 最高人民法院关于审理劳动争议案件适用法律问题的解释（一）
+    issuing_authority: 最高人民法院
+    source_type: judicial_interpretation
+    official_url: https://www.court.gov.cn/fabu-xiangqing-277041.html
+    publication_date: "2020-12-29"
+    effective_date: "2021-01-01"
+    status: active
+    jurisdiction: 全国
+    notes: "替代原四件劳动争议司法解释，现行有效"
+    supersedes:
+      - "labor_dispute_interpretation_old_1_2001"
+      - "labor_dispute_interpretation_old_2_2006"
+      - "labor_dispute_interpretation_old_3_2010"
+      - "labor_dispute_interpretation_old_4_2013"
+    superseded_by: []
+
+  - source_id: wage_arrears_criminal_interpretation_2013
+    title: 最高人民法院关于审理拒不支付劳动报酬刑事案件适用法律若干问题的解释
+    issuing_authority: 最高人民法院
+    source_type: judicial_interpretation
+    official_url: https://flk.npc.gov.cn/detail2.html?ZmY4MDgxODE3OTZhNjM2YTAxNzk4NTkzOTYxNzA5MzQ
+    publication_date: "2013-01-16"
+    effective_date: "2013-01-23"
+    status: active
+    jurisdiction: 全国
+    notes: "现行有效"
+    supersedes: []
+    superseded_by: []
+
+  # ============ 地方性法规样例（以北京为例） ============
+
+  - source_id: beijing_wage_regulation_2018
+    title: 北京市工资支付规定
+    issuing_authority: 北京市人民政府
+    source_type: local_regulation
+    official_url: https://www.beijing.gov.cn/zhengce/zhengcefagui/201905/t20190522_65109.html
+    publication_date: "2003-12-23"
+    effective_date: "2004-01-22"
+    status: active
+    jurisdiction: 北京市
+    notes: "现行有效"
+    supersedes: []
+    superseded_by: []

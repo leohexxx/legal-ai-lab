@@ -17,3 +17,10 @@ data/private/
 data/raw/
 .codex-qa/
 /要求.docx
+.pytest_cache/
+*.egg-info/
+.coverage
+htmlcov/
+.pytest_cache/
+data/normalized/
+*.pyc

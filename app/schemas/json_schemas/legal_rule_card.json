@@ -1,0 +1,166 @@
+{
+  "$defs": {
+    "ReviewStatus": {
+      "description": "审核状态.",
+      "enum": [
+        "draft",
+        "reviewed",
+        "published"
+      ],
+      "title": "ReviewStatus",
+      "type": "string"
+    }
+  },
+  "description": "法律规则卡.\n\n将法规拆分为可检索、可判断的独立规则单元，\n而不是把整部法律直接交给模型。",
+  "properties": {
+    "rule_id": {
+      "description": "规则唯一标识",
+      "pattern": "^rule_[a-z0-9_]+$",
+      "title": "Rule Id",
+      "type": "string"
+    },
+    "title": {
+      "description": "规则标题",
+      "title": "Title",
+      "type": "string"
+    },
+    "domain": {
+      "description": "法律领域",
+      "examples": [
+        "labor"
+      ],
+      "title": "Domain",
+      "type": "string"
+    },
+    "topic": {
+      "description": "主题",
+      "examples": [
+        "wage_arrears"
+      ],
+      "title": "Topic",
+      "type": "string"
+    },
+    "jurisdiction": {
+      "description": "适用地区",
+      "title": "Jurisdiction",
+      "type": "string"
+    },
+    "effective_from": {
+      "description": "生效起始日期",
+      "format": "date",
+      "title": "Effective From",
+      "type": "string"
+    },
+    "effective_to": {
+      "anyOf": [
+        {
+          "format": "date",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "生效截止日期",
+      "title": "Effective To"
+    },
+    "status": {
+      "default": "active",
+      "description": "状态: active/amended/repealed",
+      "title": "Status",
+      "type": "string"
+    },
+    "conditions": {
+      "description": "适用条件列表，每项含 description + 逻辑表达式",
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Conditions",
+      "type": "array"
+    },
+    "legal_effect": {
+      "description": "法律效果/后果描述",
+      "title": "Legal Effect",
+      "type": "string"
+    },
+    "exceptions": {
+      "description": "但书/例外情况",
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Exceptions",
+      "type": "array"
+    },
+    "facts_required": {
+      "description": "适用本规则需要确认的事实项",
+      "items": {
+        "type": "string"
+      },
+      "title": "Facts Required",
+      "type": "array"
+    },
+    "evidence_related": {
+      "description": "相关证据类型 ID",
+      "items": {
+        "type": "string"
+      },
+      "title": "Evidence Related",
+      "type": "array"
+    },
+    "procedure_related": {
+      "description": "相关程序 ID",
+      "items": {
+        "type": "string"
+      },
+      "title": "Procedure Related",
+      "type": "array"
+    },
+    "source_id": {
+      "description": "来源登记 ID",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "article_ref": {
+      "description": "条款号",
+      "examples": [
+        "第五十条"
+      ],
+      "title": "Article Ref",
+      "type": "string"
+    },
+    "official_url": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "原文链接",
+      "title": "Official Url"
+    },
+    "review_status": {
+      "$ref": "#/$defs/ReviewStatus",
+      "default": "draft",
+      "description": "审核状态"
+    }
+  },
+  "required": [
+    "rule_id",
+    "title",
+    "domain",
+    "topic",
+    "jurisdiction",
+    "effective_from",
+    "legal_effect",
+    "source_id",
+    "article_ref"
+  ],
+  "title": "LegalRuleCard",
+  "type": "object"
+}

@@ -1,0 +1,105 @@
+{
+  "description": "场景卡.\n\n定义必问事实、可能责任主体、证据清单、\n规则、流程、风险和转人工条件。",
+  "properties": {
+    "scenario_id": {
+      "description": "场景唯一标识",
+      "pattern": "^sc_[a-z0-9_]+$",
+      "title": "Scenario Id",
+      "type": "string"
+    },
+    "title": {
+      "description": "场景名称",
+      "title": "Title",
+      "type": "string"
+    },
+    "domain": {
+      "description": "法律领域",
+      "title": "Domain",
+      "type": "string"
+    },
+    "topic": {
+      "description": "主题",
+      "title": "Topic",
+      "type": "string"
+    },
+    "description": {
+      "description": "场景描述",
+      "title": "Description",
+      "type": "string"
+    },
+    "trigger_keywords": {
+      "description": "触发该场景的用户输入关键词",
+      "items": {
+        "type": "string"
+      },
+      "title": "Trigger Keywords",
+      "type": "array"
+    },
+    "required_facts": {
+      "description": "必问事实列表（含字段、类型、提问话术）",
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Required Facts",
+      "type": "array"
+    },
+    "possible_liable_parties": {
+      "description": "可能责任主体类型",
+      "items": {
+        "type": "string"
+      },
+      "title": "Possible Liable Parties",
+      "type": "array"
+    },
+    "evidence_checklist": {
+      "description": "证据清单 ID 列表",
+      "items": {
+        "type": "string"
+      },
+      "title": "Evidence Checklist",
+      "type": "array"
+    },
+    "rules_reference": {
+      "description": "相关规则 ID 列表",
+      "items": {
+        "type": "string"
+      },
+      "title": "Rules Reference",
+      "type": "array"
+    },
+    "procedures_reference": {
+      "description": "相关程序 ID 列表",
+      "items": {
+        "type": "string"
+      },
+      "title": "Procedures Reference",
+      "type": "array"
+    },
+    "risks": {
+      "description": "风险提示",
+      "items": {
+        "type": "string"
+      },
+      "title": "Risks",
+      "type": "array"
+    },
+    "escalation_conditions": {
+      "description": "转人工咨询条件",
+      "items": {
+        "type": "string"
+      },
+      "title": "Escalation Conditions",
+      "type": "array"
+    }
+  },
+  "required": [
+    "scenario_id",
+    "title",
+    "domain",
+    "topic",
+    "description"
+  ],
+  "title": "ScenarioCard",
+  "type": "object"
+}

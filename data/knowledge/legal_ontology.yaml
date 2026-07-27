@@ -1,0 +1,178 @@
+# Legal AI Lab - 小型法律本体（第一版）
+#
+# 参考 Strategy_and_Knowledge_Engineering.md 定义。
+# 只定义稳定、可复用的核心实体和关系。
+# 后续由 Python 模型（app/schemas/）作为正式 schema 来源。
+# 本文件为人工可读的文档版本。
+
+# ============ 核心实体 ============
+
+entities:
+  - name: 劳动者
+    description: 提供劳动并获取报酬的自然人
+    alias: [员工, 职工, 雇员, 工人]
+    relations:
+      - type: 工作于
+        target: 用人单位
+        description: 与用人单位存在劳动关系
+
+  - name: 用人单位
+    description: 使用劳动力的组织或个人
+    alias: [雇主, 公司, 企业, 单位]
+    sub_types:
+      - 企业法人
+      - 个体工商户
+      - 其他组织
+    relations:
+      - type: 用工
+        target: 劳动者
+        description: 与劳动者建立劳动关系
+
+  - name: 劳动关系
+    description: 劳动者与用人单位之间的权利义务关系
+    attributes:
+      - 起始日期
+      - 终止日期
+      - 是否签订书面合同
+    includes:
+      - 标准劳动关系
+      - 事实劳动关系
+      - 劳务派遣关系
+
+  - name: 事件
+    description: 与法律纠纷相关的发生事件
+    sub_types:
+      - 欠薪
+      - 违法解除
+      - 未签合同
+      - 工伤
+    attributes:
+      - 发生日期
+      - 涉及金额
+      - 相关方
+
+  - name: 请求
+    description: 用户提出的法律主张或诉求
+    sub_types:
+      - 支付工资
+      - 支付赔偿金
+      - 支付经济补偿
+      - 确认劳动关系
+    attributes:
+      - 请求金额
+      - 法律依据
+      - 证据支持
+    relations:
+      - type: 基于
+        target: 事件
+      - type: 需要
+        target: 证据
+      - type: 适用
+        target: 法律规则
+
+  - name: 证据
+    description: 证明事实的材料
+    sub_types:
+      - 书证（合同、工资条等）
+      - 电子证据（聊天记录、邮件等）
+      - 证人证言
+      - 视听资料
+    attributes:
+      - 名称
+      - 类型
+      - 持有方
+      - 是否原件
+
+  - name: 法律规则
+    description: 法律、法规、规章中的具体条款规则
+    attributes:
+      - 来源文件
+      - 条款号
+      - 生效日期
+      - 适用条件
+      - 法律效果
+
+  - name: 程序
+    description: 解决争议的法定流程
+    sub_types:
+      - 协商
+      - 调解
+      - 劳动监察投诉
+      - 劳动仲裁
+      - 民事诉讼
+      - 强制执行
+    attributes:
+      - 主管机关
+      - 时限
+      - 前置程序
+      - 管辖
+
+  - name: 期限
+    description: 法律规定的时效或期间
+    sub_types:
+      - 仲裁时效
+      - 诉讼时效
+      - 申诉时效
+      - 支付周期
+    attributes:
+      - 长度
+      - 起算点
+      - 是否可变
+
+  - name: 案例
+    description: 已生效的裁判案例
+    attributes:
+      - 案号
+      - 法院
+      - 裁判日期
+      - 事实摘要
+      - 裁判理由
+      - 裁判结果
+    relations:
+      - type: 解释
+        target: 法律规则
+
+# ============ 核心关系 ============
+
+core_relations:
+  - type: 工作于
+    description: 劳动者与用人单位的关联
+    source: 劳动者
+    target: 用人单位
+
+  - type: 基于
+    description: 请求与事实事件的关联
+    source: 请求
+    target: 事件
+
+  - type: 需要
+    description: 请求需要证据支持
+    source: 请求
+    target: 证据
+
+  - type: 适用
+    description: 请求适用的法律规则
+    source: 请求
+    target: 法律规则
+
+  - type: 受限于
+    description: 法律规则的地区和时间限制
+    source: 法律规则
+    target: 地区
+    attributes: [生效日期, 截止日期]
+
+  - type: 解释
+    description: 案例对法律规则的解释
+    source: 案例
+    target: 法律规则
+
+  - type: 前置于
+    description: 程序之间的先后关系
+    source: 程序
+    target: 程序
+    attributes: [前置程序]
+
+  - type: 证明
+    description: 证据对事实的证明作用
+    source: 证据
+    target: 事件
