@@ -34,6 +34,8 @@ AI-powered legal assistance platform research and development project.
 - `07-Partners`：律师与高校合作资源
 - `08-Research`：论文和研究记录
 
+战略与知识工程设计见 [00-Vision/Strategy_and_Knowledge_Engineering.md](00-Vision/Strategy_and_Knowledge_Engineering.md)。
+
 ## 近期里程碑
 
 1. 完成产品与知识库基线文档。
