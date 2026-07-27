@@ -1,0 +1,33 @@
+# 规则卡 - 欠薪支付令规则
+# 来源：中华人民共和国劳动合同法 第三十条
+# 关联主题：wage_arrears
+
+rule_id: "labor_rule_011"
+title: "欠薪支付令规则"
+domain: "labor"
+topic: "wage_arrears"
+jurisdiction: "全国"
+effective_from: "2008-01-01"
+effective_to: null
+status: "active"
+conditions:
+  - "用人单位拖欠或者未足额支付劳动报酬"
+legal_effect: "劳动者可以依法向当地人民法院申请支付令，人民法院应当依法发出支付令。支付令程序适用民事诉讼法督促程序规定。支付令被裁定终结督促程序后，劳动者就劳动争议事项直接提起诉讼的，应当先向劳动争议仲裁机构申请仲裁。"
+exceptions:
+  - "支付令被裁定终结督促程序后，不能直接起诉（需先仲裁）"
+  - "依据调解协议申请支付令被裁定终结督促程序的，可依据调解协议直接起诉"
+facts_required:
+  - "用人单位欠薪的事实"
+  - "具体欠薪金额"
+  - "劳动合同或工资欠条等债权凭证"
+evidence_related:
+  - "劳动合同"
+  - "工资欠条"
+  - "工资条"
+  - "银行流水"
+procedure_related:
+  - "申请支付令"
+  - "劳动仲裁"
+source_id: "labor_contract_law_2012"
+article_ref: "第三十条"
+review_status: "draft"

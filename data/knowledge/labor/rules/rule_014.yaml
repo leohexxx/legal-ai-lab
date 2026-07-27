@@ -1,0 +1,33 @@
+# 规则卡 - 加班费举证责任规则
+# 来源：最高人民法院关于审理劳动争议案件适用法律问题的解释（一） 第四十二条
+# 关联主题：wage_arrears
+
+rule_id: "labor_rule_014"
+title: "加班费举证责任规则"
+domain: "labor"
+topic: "wage_arrears"
+jurisdiction: "全国"
+effective_from: "2021-01-01"
+effective_to: null
+status: "active"
+conditions:
+  - "劳动者主张加班费"
+legal_effect: "劳动者主张加班费的，应当就加班事实的存在承担举证责任。但劳动者有证据证明用人单位掌握加班事实存在的证据，用人单位不提供的，由用人单位承担不利后果。"
+exceptions:
+  - "劳动者不能提供任何加班证据且不能证明用人单位掌握加班证据的，加班费请求不被支持"
+facts_required:
+  - "是否存在加班事实"
+  - "加班的具体日期和时长"
+  - "用人单位是否掌握考勤记录等加班证据"
+evidence_related:
+  - "考勤记录"
+  - "考勤打卡记录"
+  - "加班审批单"
+  - "聊天记录"
+  - "工作邮件"
+procedure_related:
+  - "劳动仲裁"
+  - "法院诉讼"
+source_id: "labor_dispute_interpretation_1_2006"
+article_ref: "第四十二条"
+review_status: "draft"

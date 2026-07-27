@@ -1,0 +1,35 @@
+# 规则卡 - 工资争议用人单位举证责任规则
+# 来源：最高人民法院关于审理劳动争议案件适用法律问题的解释（一） 第四十四条
+# 关联主题：wage_arrears
+
+rule_id: "labor_rule_013"
+title: "工资争议用人单位举证责任规则"
+domain: "labor"
+topic: "wage_arrears"
+jurisdiction: "全国"
+effective_from: "2021-01-01"
+effective_to: null
+status: "active"
+conditions:
+  - "因用人单位作出的减少劳动报酬决定发生劳动争议"
+  - "因用人单位作出计算劳动者工作年限决定发生劳动争议"
+legal_effect: "因用人单位作出减少劳动报酬、计算劳动者工作年限等决定而发生劳动争议的，用人单位负举证责任。用人单位不能举证的，应当承担不利后果。"
+exceptions:
+  - "劳动者主张的事实（如加班事实）仍由劳动者初步举证"
+  - "劳动争议中'谁主张谁举证'为一般原则，本条为特殊举证责任倒置"
+facts_required:
+  - "用人单位是否作出了减少劳动报酬的决定"
+  - "用人单位减少劳动报酬的依据"
+  - "劳动者原工资标准"
+evidence_related:
+  - "劳动合同"
+  - "工资条"
+  - "银行流水"
+  - "用人单位薪酬制度"
+  - "减薪通知书"
+procedure_related:
+  - "劳动仲裁"
+  - "法院诉讼"
+source_id: "labor_dispute_interpretation_1_2006"
+article_ref: "第四十四条"
+review_status: "draft"

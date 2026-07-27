@@ -1,0 +1,33 @@
+# 规则卡 - 劳动监察投诉权利规则
+# 来源：劳动保障监察条例 第九条、第十条
+# 关联主题：wage_arrears
+
+rule_id: "labor_rule_015"
+title: "劳动监察投诉权利规则"
+domain: "labor"
+topic: "wage_arrears"
+jurisdiction: "全国"
+effective_from: "2004-12-01"
+effective_to: null
+status: "active"
+conditions:
+  - "劳动者认为用人单位侵犯其劳动保障合法权益"
+  - "用人单位存在违反劳动保障法律、法规或规章的行为"
+legal_effect: "任何组织或个人对违反劳动保障法律、法规或规章的行为有权向劳动保障行政部门举报。劳动者认为用人单位侵犯其合法权益的，有权向劳动保障行政部门投诉。劳动保障行政部门应当为举报人保密，对举报属实并为查处重大违法行为提供主要线索和证据的举报人给予奖励。"
+exceptions:
+  - "应当通过劳动争议处理程序解决的事项，或已申请仲裁、提起诉讼的事项，劳动保障行政部门应告知投诉人按劳动争议程序办理"
+  - "违法行为超过2年未被发现、举报、投诉的，不再查处"
+facts_required:
+  - "用人单位存在违反劳动法律的行为"
+  - "违法行为的发生时间"
+  - "违法行为是否仍在2年追诉期内"
+  - "劳动者与用人单位之间是否存在劳动争议"
+evidence_related:
+  - "劳动合同"
+  - "工资条"
+  - "身份证明"
+procedure_related:
+  - "劳动监察投诉"
+source_id: "labor_supervision_regulation_2004"
+article_ref: "第九条、第十条"
+review_status: "draft"

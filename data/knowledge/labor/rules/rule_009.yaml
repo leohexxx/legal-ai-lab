@@ -1,0 +1,37 @@
+# 规则卡 - 欠薪仲裁时效特殊规则
+# 来源：中华人民共和国劳动争议调解仲裁法 第二十七条
+# 关联主题：wage_arrears
+
+rule_id: "labor_rule_009"
+title: "欠薪仲裁时效特殊规则"
+domain: "labor"
+topic: "wage_arrears"
+jurisdiction: "全国"
+effective_from: "2008-05-01"
+effective_to: null
+status: "active"
+conditions:
+  - "发生劳动争议"
+  - "因拖欠劳动报酬发生争议"
+  - "劳动关系存续期间或已终止"
+legal_effect: "劳动争议申请仲裁的时效期间为一年，自知道或应当知道权利被侵害之日起计算。但劳动关系存续期间因拖欠劳动报酬发生争议的，劳动者申请仲裁不受一年仲裁时效限制；劳动关系终止的，应当自劳动关系终止之日起一年内提出。"
+exceptions:
+  - "劳动关系终止后超过一年未申请的，丧失仲裁请求权"
+  - "其他劳动争议（非欠薪）仍适用一年仲裁时效"
+  - "仲裁时效可因当事人主张权利、请求救济或对方同意履行义务而中断"
+facts_required:
+  - "欠薪行为发生时间"
+  - "劳动关系是否存续或何时终止"
+  - "劳动者何时知道或应当知道权利被侵害"
+  - "是否存在仲裁时效中断事由"
+evidence_related:
+  - "劳动合同"
+  - "解除/终止劳动合同证明"
+  - "工资条"
+  - "催讨工资的聊天记录或函件"
+procedure_related:
+  - "劳动仲裁"
+  - "法院诉讼"
+source_id: "labor_dispute_mediation_law_2007"
+article_ref: "第二十七条"
+review_status: "draft"

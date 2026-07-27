@@ -1,0 +1,36 @@
+# 规则卡 - 工资应当按时足额支付
+# 来源：中华人民共和国劳动法 第五十条
+# 关联主题：wage_arrears
+
+rule_id: "labor_rule_001"
+title: "工资应当按时足额支付"
+domain: "labor"
+topic: "wage_arrears"
+jurisdiction: "全国"
+effective_from: "1995-01-01"
+effective_to: null
+status: "active"
+conditions:
+  - "存在劳动关系"
+  - "用人单位已安排劳动者提供劳动"
+legal_effect: "工资应当以货币形式按月支付给劳动者本人。不得克扣或者无故拖欠劳动者的工资。"
+exceptions:
+  - "法定允许代扣的情形（个人所得税、社会保险费个人部分、法院判决代扣等）"
+  - "用人单位代扣代缴的款项"
+facts_required:
+  - "是否建立劳动关系"
+  - "约定工资标准"
+  - "实际支付记录"
+  - "是否存在克扣或拖欠行为"
+evidence_related:
+  - "劳动合同"
+  - "工资条"
+  - "银行流水"
+  - "考勤记录"
+procedure_related:
+  - "劳动监察投诉"
+  - "劳动仲裁"
+  - "法院诉讼"
+source_id: "labor_law_2018"
+article_ref: "第五十条"
+review_status: "draft"

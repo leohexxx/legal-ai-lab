@@ -1,0 +1,36 @@
+# 规则卡 - 加班工资支付规则
+# 来源：中华人民共和国劳动法 第四十四条
+# 关联主题：wage_arrears
+
+rule_id: "labor_rule_002"
+title: "加班工资支付规则"
+domain: "labor"
+topic: "wage_arrears"
+jurisdiction: "全国"
+effective_from: "1995-01-01"
+effective_to: null
+status: "active"
+conditions:
+  - "用人单位安排劳动者延长工作时间"
+  - "用人单位安排休息日工作且不能安排补休"
+  - "用人单位安排法定休假日工作"
+legal_effect: "安排延长工作时间的，支付不低于工资150%的报酬；休息日安排工作不能补休的，支付不低于工资200%的报酬；法定休假日安排工作的，支付不低于工资300%的报酬。"
+exceptions:
+  - "休息日安排工作安排了补休的，可不支付200%加班工资"
+  - "发生自然灾害、事故等紧急情况延长工作时间不受限制"
+facts_required:
+  - "是否存在加班事实"
+  - "加班时长"
+  - "正常工作时间工资标准"
+  - "用人单位是否安排补休（休息日加班）"
+evidence_related:
+  - "考勤记录"
+  - "考勤打卡记录"
+  - "工资条"
+  - "劳动合同"
+procedure_related:
+  - "劳动仲裁"
+  - "法院诉讼"
+source_id: "labor_law_2018"
+article_ref: "第四十四条"
+review_status: "draft"
