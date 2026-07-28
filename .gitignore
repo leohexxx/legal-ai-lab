@@ -26,3 +26,5 @@ htmlcov/
 .pytest_cache/
 data/normalized/
 *.pyc
+frontend_bak/
+frontend/.next2/

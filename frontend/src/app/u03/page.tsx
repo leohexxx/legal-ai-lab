@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense } from "react";
+import { useCaseStore } from "@/lib/store";
 
 const DOMAINS = [
   { id: "labor", label: "劳动争议", desc: "欠薪、合同、辞退、社保等" },
@@ -58,15 +59,21 @@ function U03Content() {
 
   const handleProceed = () => {
     if (!isComplete) return;
-    const params = new URLSearchParams({
-      q: query,
+    const store = useCaseStore.getState();
+    store.setCaseInfo({
+      id: `M-${Date.now()}`,
+      title: "劳动争议案件",
+      status: "draft",
+      createdAt: new Date().toISOString().slice(0, 10),
+      updatedAt: new Date().toISOString().slice(0, 16).replace("T", " "),
       domain,
       province: province === "other" ? customProvince : province,
-      goal,
-      urgent: urgent.join(","),
       city,
+      goal,
+      urgent: urgent.filter((u) => u !== "none"),
+      description: query,
     });
-    router.push(`/u04?${params.toString()}`);
+    router.push("/u04");
   };
 
   return (

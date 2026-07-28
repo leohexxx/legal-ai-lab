@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { useCaseStore } from "@/lib/store";
 
 const COMMON_ISSUES = [
   {
@@ -42,6 +43,16 @@ export default function HomePage() {
   const router = useRouter();
   const [query, setQuery] = useState("");
   const [pageState, setPageState] = useState<PageState>("default");
+  const [hasCase, setHasCase] = useState(false);
+
+  // 检查 store 中是否有已有案件
+  useEffect(() => {
+    const unsubscribe = useCaseStore.subscribe((state) => {
+      setHasCase(!!state.caseInfo);
+    });
+    setHasCase(!!useCaseStore.getState().caseInfo);
+    return unsubscribe;
+  }, []);
 
   const handleSubmit = async () => {
     if (!query.trim()) return;
@@ -147,12 +158,28 @@ export default function HomePage() {
         </div>
 
         {/* 继续已有案件 */}
-        <button
-          onClick={() => router.push("/u06?case=demo")}
-          className="text-sm text-gray-400 hover:text-primary transition-colors underline underline-offset-2"
-        >
-          继续已有案件 →
-        </button>
+        {hasCase ? (
+          <button
+            onClick={() => {
+              const ci = useCaseStore.getState().caseInfo;
+              if (ci) {
+                router.push("/u06");
+              } else {
+                router.push("/u14");
+              }
+            }}
+            className="text-sm text-primary hover:text-[#3C3489] transition-colors font-medium"
+          >
+            继续已有案件 →
+          </button>
+        ) : (
+          <button
+            onClick={() => router.push("/u14")}
+            className="text-sm text-gray-400 hover:text-primary transition-colors underline underline-offset-2"
+          >
+            历史案件 →
+          </button>
+        )}
       </main>
 
       {/* 底部 */}

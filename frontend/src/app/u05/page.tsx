@@ -1,42 +1,50 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense } from "react";
-
-type FactItem = {
-  id: string;
-  label: string;
-  value: string;
-  status: "confirmed" | "pending" | "inferred" | "contradiction";
-  source?: string;
-};
-
-const MOCK_FACTS: FactItem[] = [
-  { id: "f01", label: "用人单位", value: "北京某某科技有限公司", status: "confirmed" },
-  { id: "f02", label: "实际工作地点", value: "北京市朝阳区", status: "confirmed" },
-  { id: "f03", label: "在职状态", value: "在职", status: "confirmed" },
-  { id: "f04", label: "劳动合同", value: "已签订固定期限劳动合同", status: "confirmed" },
-  { id: "f05", label: "约定月工资", value: "15,000 元（税前）", status: "confirmed" },
-  { id: "f06", label: "发薪日", value: "每月 15 日", status: "confirmed" },
-  { id: "f07", label: "欠薪期间", value: "2026年1月至2026年6月", status: "pending", source: "用户口述" },
-  { id: "f08", label: "每月应付", value: "15,000 元", status: "pending", source: "根据约定工资推算" },
-  { id: "f09", label: "每月实付", value: "2026年1-3月实付5,000元/月，4-6月未付", status: "pending", source: "用户口述" },
-  { id: "f10", label: "欠薪总额（估算）", value: "约 75,000 元", status: "inferred", source: "系统根据应付实付估算" },
-  { id: "f11", label: "合同主体与实际管理主体不一致", value: "合同为A公司，实际由B公司管理发薪", status: "contradiction", source: "用户口述与合同信息对比" },
-];
+import { useCaseStore, initDemoCase } from "@/lib/store";
+import type { FactItem } from "@/lib/types";
+import LoadingSkeleton from "@/components/LoadingSkeleton";
+import EmptyState from "@/components/EmptyState";
+import ErrorState from "@/components/ErrorState";
 
 function U05Content() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [facts, setFacts] = useState<FactItem[]>(MOCK_FACTS);
+  const [hasError, setHasError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const isHydrated = useCaseStore((s) => s.isHydrated);
+  const isLoading = useCaseStore((s) => s.isLoading);
+
+  useEffect(() => {
+    try {
+      const state = useCaseStore.getState();
+      if (state.isHydrated && state.facts.length === 0 && !state.isLoading) {
+        initDemoCase();
+      }
+    } catch (err) {
+      setHasError(true);
+      setErrorMessage(err instanceof Error ? err.message : "初始化失败");
+    }
+  }, [isHydrated]);
+
+  // 本地可编辑的事实副本，从 store 初始化
+  const [facts, setFacts] = useState<FactItem[]>(() => {
+    const state = useCaseStore.getState();
+    return state.facts;
+  });
   const [showEdit, setShowEdit] = useState<string | null>(null);
   const [editValue, setEditValue] = useState("");
 
   const hasContradiction = facts.some((f) => f.status === "contradiction");
 
   const handleConfirm = () => {
-    router.push(`/u06?case=demo`);
+    const store = useCaseStore.getState();
+    store.setFacts(facts);
+    store.confirmAllFacts();
+    router.push("/u06");
   };
 
   const handleEdit = (fact: FactItem) => {
@@ -52,6 +60,52 @@ function U05Content() {
       setShowEdit(null);
     }
   };
+
+  // 加载中
+  if (!isHydrated || isLoading) {
+    return (
+      <div className="flex flex-col min-h-screen">
+        <div className="border-b border-gray-100 px-4 py-3">
+          <div className="max-w-2xl mx-auto"><div className="h-4 w-24 animate-pulse rounded bg-gray-200" /></div>
+        </div>
+        <main className="flex-1 px-4 py-10 max-w-2xl mx-auto w-full">
+          <LoadingSkeleton variant="list" message="正在整理事实摘要..." />
+        </main>
+      </div>
+    );
+  }
+
+  // 错误状态
+  if (hasError) {
+    return (
+      <div className="flex flex-col min-h-screen">
+        <div className="border-b border-gray-100 px-4 py-3">
+          <div className="max-w-2xl mx-auto flex items-center gap-3">
+            <button onClick={() => router.push("/")} className="text-sm text-gray-400 hover:text-primary transition-colors">← 首页</button>
+          </div>
+        </div>
+        <main className="flex-1 px-4 py-10 max-w-2xl mx-auto w-full">
+          <ErrorState title="加载失败" message={errorMessage} severity="error" onRetry={() => { setHasError(false); initDemoCase(); }} />
+        </main>
+      </div>
+    );
+  }
+
+  // 空状态
+  if (facts.length === 0) {
+    return (
+      <div className="flex flex-col min-h-screen">
+        <div className="border-b border-gray-100 px-4 py-3">
+          <div className="max-w-2xl mx-auto flex items-center gap-3">
+            <button onClick={() => router.push("/")} className="text-sm text-gray-400 hover:text-primary transition-colors">← 首页</button>
+          </div>
+        </div>
+        <main className="flex-1 px-4 py-10 max-w-2xl mx-auto w-full">
+          <EmptyState icon="📋" title="暂无事实数据" description="请先在引导采集页面填写案件信息" actionLabel="去采集" onAction={() => router.push("/u04")} />
+        </main>
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col min-h-screen">

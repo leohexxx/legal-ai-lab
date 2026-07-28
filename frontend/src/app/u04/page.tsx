@@ -1,8 +1,9 @@
 "use client";
 
 import { useState, useCallback } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
-import { Suspense } from "react";
+import { useRouter } from "next/navigation";
+import { useCaseStore } from "@/lib/store";
+import type { IntakeData, FactItem } from "@/lib/types";
 
 // 8 步流程定义
 const STEPS = [
@@ -15,38 +16,6 @@ const STEPS = [
   { id: "actions", title: "已采取的行动", question: "您已经做了哪些事？" },
   { id: "summary", title: "采集汇总", question: "以上是您提供的全部信息" },
 ];
-
-type IntakeData = {
-  employerName: string;
-  workplace: string;
-  isEmployerKnown: boolean;
-  isOnJob: string; // "yes" | "no" | "unknown"
-  resignationDate: string;
-  contractStatus: string; // "signed" | "unsigned" | "unknown"
-  contractParty: string;
-  actualManager: string;
-  salaryType: string; // "fixed" | "fixed_plus" | "performance" | "unknown"
-  baseSalary: string;
-  salaryPeriod: string;
-  payDay: string;
-  arrearsStart: string;
-  arrearsEnd: string;
-  totalOwed: string;
-  hasPaySlip: boolean;
-  hasBankStatement: boolean;
-  hasChatRecord: boolean;
-  hasContract: boolean;
-  hasAttendance: boolean;
-  hasOther: boolean;
-  otherEvidence: string;
-  hasComplained: boolean;
-  hasArbitrated: boolean;
-  hasSued: boolean;
-  hasNegotiated: boolean;
-  companyResponse: string;
-  goal: string;
-  urgentNote: string;
-};
 
 const INITIAL_DATA: IntakeData = {
   employerName: "",
@@ -82,8 +51,7 @@ const INITIAL_DATA: IntakeData = {
 
 function U04Content() {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const query = searchParams.get("q") || "";
+  const caseInfo = useCaseStore((s) => s.caseInfo);
 
   const [step, setStep] = useState(0);
   const [data, setData] = useState<IntakeData>(INITIAL_DATA);
@@ -113,8 +81,59 @@ function U04Content() {
   const progress = Math.round(((step + 1) / STEPS.length) * 100);
 
   const handleFinish = () => {
-    const params = new URLSearchParams({ q: query, ...searchParams.toString().split("&").map(p => p.split("=")).reduce((a, [k, v]) => ({...a, [k]: v}), {}) });
-    router.push(`/u05?${params.toString()}`);
+    const store = useCaseStore.getState();
+
+    // 1. Save intake data to store
+    store.setIntakeData(data);
+
+    // 2. Generate initial facts from intake data
+    const ts = Date.now();
+    const facts: FactItem[] = [];
+
+    if (data.employerName) {
+      facts.push({ id: `f-${ts}-1`, label: "用人单位", value: data.employerName, status: "confirmed", category: "主体" });
+    }
+    if (data.workplace) {
+      facts.push({ id: `f-${ts}-2`, label: "实际工作地点", value: data.workplace, status: "confirmed", category: "主体" });
+    }
+    if (data.isOnJob) {
+      const statusLabel = data.isOnJob === "yes" ? "在职" : data.isOnJob === "no" ? `已离职${data.resignationDate ? "（" + data.resignationDate + "）" : ""}` : "待确认";
+      facts.push({ id: `f-${ts}-3`, label: "在职状态", value: statusLabel, status: "confirmed", category: "状态" });
+    }
+    if (data.contractStatus) {
+      const contractLabel = data.contractStatus === "signed" ? "已签订劳动合同" : data.contractStatus === "unsigned" ? "未签订劳动合同" : "待确认";
+      facts.push({ id: `f-${ts}-4`, label: "劳动合同情况", value: contractLabel, status: "confirmed", category: "合同" });
+    }
+    if (data.baseSalary) {
+      facts.push({ id: `f-${ts}-5`, label: "约定工资", value: `${data.baseSalary}/月`, status: "confirmed", category: "工资" });
+    }
+    facts.push({
+      id: `f-${ts}-6`,
+      label: "欠薪期间",
+      value: `${data.arrearsStart || "?"} 至 ${data.arrearsEnd || "?"}`,
+      status: "pending",
+      category: "欠薪",
+    });
+    if (data.totalOwed) {
+      facts.push({ id: `f-${ts}-7`, label: "欠薪金额", value: data.totalOwed, status: "pending", category: "欠薪" });
+    }
+    if (data.contractParty) {
+      facts.push({ id: `f-${ts}-8`, label: "合同主体", value: data.contractParty, status: "confirmed", category: "主体" });
+    }
+    if (data.actualManager) {
+      facts.push({ id: `f-${ts}-9`, label: "实际管理方", value: data.actualManager, status: "confirmed", category: "主体" });
+    }
+
+    store.setFacts(facts);
+
+    // 3. Update case info with better title and status
+    const title = data.employerName && data.employerName !== "暂不确定"
+      ? `${data.employerName}欠薪纠纷`
+      : (store.caseInfo?.title || "劳动争议案件");
+    store.updateCaseInfo({ title, status: "pending_facts" });
+
+    // 4. Navigate to analysis page
+    router.push("/u05");
   };
 
   return (
@@ -463,6 +482,23 @@ function U04Content() {
               <p className="text-xs text-green-700 mt-1">您可以继续或回到任何步骤修改信息。</p>
             </div>
 
+            {/* 案件上下文（来自 U03 的案件基本信息） */}
+            {caseInfo && (
+              <div className="bg-gray-50 rounded-xl px-4 py-3 space-y-1.5">
+                <p className="text-xs text-gray-500 font-medium">案件上下文</p>
+                <div className="flex flex-wrap gap-x-6 gap-y-1 text-sm">
+                  <span className="text-gray-400">领域：</span>
+                  <span className="text-gray-700">{caseInfo.domain === "labor" ? "劳动争议" : caseInfo.domain === "civil" ? "民事纠纷" : caseInfo.domain}</span>
+                  <span className="text-gray-400">地区：</span>
+                  <span className="text-gray-700">{caseInfo.province}{caseInfo.city ? ` · ${caseInfo.city}` : ""}</span>
+                  <span className="text-gray-400">目标：</span>
+                  <span className="text-gray-700">
+                    {caseInfo.goal === "understand" ? "了解规则" : caseInfo.goal === "prepare" ? "准备材料" : caseInfo.goal === "start_procedure" ? "启动程序" : caseInfo.goal === "find_lawyer" ? "找律师" : caseInfo.goal}
+                  </span>
+                </div>
+              </div>
+            )}
+
             {/* 关键字段摘要 */}
             <div className="space-y-2">
               <SummaryRow label="用人单位" value={data.employerName || "未填写"} />
@@ -525,9 +561,5 @@ function getWhyText(step: number): string {
 }
 
 export default function U04Page() {
-  return (
-    <Suspense fallback={<div className="p-8 text-center text-sm text-gray-400">加载中...</div>}>
-      <U04Content />
-    </Suspense>
-  );
+  return <U04Content />;
 }
