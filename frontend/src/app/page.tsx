@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useCaseStore } from "@/lib/store";
+import { identifyIntent } from "@/lib/api";
+import type { IntentResult } from "@/lib/types";
 
 const COMMON_ISSUES = [
   {
@@ -37,12 +39,14 @@ const COMMON_ISSUES = [
   },
 ];
 
-type PageState = "default" | "inputting" | "identifying" | "identified" | "unrecognized" | "urgent";
+type PageState = "default" | "inputting" | "identifying" | "identified" | "unrecognized";
 
 export default function HomePage() {
   const router = useRouter();
   const [query, setQuery] = useState("");
   const [pageState, setPageState] = useState<PageState>("default");
+  const [intentResult, setIntentResult] = useState<IntentResult | null>(null);
+  const [error, setError] = useState("");
   const [hasCase, setHasCase] = useState(false);
 
   // 检查 store 中是否有已有案件
@@ -54,29 +58,44 @@ export default function HomePage() {
     return unsubscribe;
   }, []);
 
-  const handleSubmit = async () => {
-    if (!query.trim()) return;
+  const handleIdentify = async (text: string) => {
+    if (!text.trim()) return;
 
     setPageState("identifying");
+    setError("");
+    setIntentResult(null);
 
-    // 模拟识别过程
-    await new Promise((r) => setTimeout(r, 1200));
+    try {
+      const result = await identifyIntent(text);
+      setIntentResult(result);
 
-    // 识别结果由后端决定，前端先导航到 U03（领域确认页）
-    // 把查询文本通过 URL 参数传递
-    router.push(`/u03?q=${encodeURIComponent(query.trim())}`);
+      if (result.confidence < 0.3) {
+        // 低置信度 → 跳转到 U03 降级通道
+        router.push(`/u03?q=${encodeURIComponent(text.trim())}`);
+      } else {
+        setPageState("identified");
+      }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "识别失败");
+      setPageState("default");
+    }
+  };
+
+  const handleSubmit = () => {
+    handleIdentify(query);
   };
 
   const handleScenarioClick = (q: string) => {
     setQuery(q);
-    setPageState("inputting");
-    // 自动触发
-    setTimeout(() => {
-      setPageState("identifying");
-    }, 300);
-    setTimeout(() => {
-      router.push(`/u03?q=${encodeURIComponent(q)}`);
-    }, 1500);
+    handleIdentify(q);
+  };
+
+  const handleContinueToChat = () => {
+    if (intentResult) {
+      router.push(`/u04?q=${encodeURIComponent(query.trim())}&categoryId=${intentResult.categoryId}`);
+    } else {
+      router.push(`/u04?q=${encodeURIComponent(query.trim())}`);
+    }
   };
 
   return (
@@ -113,6 +132,8 @@ export default function HomePage() {
               onChange={(e) => {
                 setQuery(e.target.value);
                 setPageState(e.target.value.trim() ? "inputting" : "default");
+                setIntentResult(null);
+                setError("");
               }}
               placeholder="例如：我从去年10月入职一家公司，前三个月工资正常发，但从今年1月开始就只发了一半，到现在还欠我两个月工资..."
               rows={3}
@@ -128,13 +149,54 @@ export default function HomePage() {
             )}
           </div>
 
-          <button
-            onClick={handleSubmit}
-            disabled={!query.trim() || pageState === "identifying"}
-            className="mt-3 w-full rounded-xl bg-primary text-white py-3 text-sm font-medium hover:bg-[#3C3489] disabled:bg-gray-200 disabled:text-gray-400 transition-colors"
-          >
-            {pageState === "identifying" ? "识别中..." : "开始梳理"}
-          </button>
+          {error && (
+            <p className="mt-2 text-xs text-red-500">{error}</p>
+          )}
+
+          {/* 识别结果 */}
+          {pageState === "identified" && intentResult && (
+            <div className="mt-3 rounded-xl border border-primary/30 bg-primary-light/20 p-4 space-y-3">
+              <div className="flex items-center gap-2">
+                <span className="text-sm font-medium text-gray-700">系统识别为：</span>
+                <span className="inline-flex items-center gap-1 rounded-md bg-primary/10 px-2.5 py-1 text-sm font-medium text-primary">
+                  {intentResult.level1} → {intentResult.level2}
+                </span>
+                <span className={`text-xs px-2 py-0.5 rounded-full border ${
+                  intentResult.confidence >= 0.7
+                    ? "text-green-600 bg-green-50 border-green-200"
+                    : "text-amber-600 bg-amber-50 border-amber-200"
+                }`}>
+                  {Math.round(intentResult.confidence * 100)}%
+                </span>
+              </div>
+              <p className="text-sm text-gray-600">{intentResult.summary}</p>
+              {intentResult.extractedKeywords.length > 0 && (
+                <div className="flex flex-wrap gap-1">
+                  {intentResult.extractedKeywords.map((kw, i) => (
+                    <span key={i} className="inline-block rounded bg-gray-50 px-2 py-0.5 text-xs text-gray-500 border border-gray-100">
+                      {kw}
+                    </span>
+                  ))}
+                </div>
+              )}
+              <button
+                onClick={handleContinueToChat}
+                className="w-full rounded-xl bg-primary text-white py-2.5 text-sm font-medium hover:bg-[#3C3489] transition-colors"
+              >
+                继续对话 →
+              </button>
+            </div>
+          )}
+
+          {pageState !== "identified" && (
+            <button
+              onClick={handleSubmit}
+              disabled={!query.trim() || pageState === "identifying"}
+              className="mt-3 w-full rounded-xl bg-primary text-white py-3 text-sm font-medium hover:bg-[#3C3489] disabled:bg-gray-200 disabled:text-gray-400 transition-colors"
+            >
+              {pageState === "identifying" ? "识别中..." : "开始梳理"}
+            </button>
+          )}
         </div>
 
         {/* 常见问题 */}
@@ -185,7 +247,6 @@ export default function HomePage() {
       {/* 底部 */}
       <footer className="border-t border-gray-100 px-4 py-4">
         <div className="max-w-2xl mx-auto flex flex-wrap items-center justify-center gap-4 text-xs text-gray-400">
-          <span>当前深度支持：劳动争议（欠薪）</span>
           <button
             onClick={() => router.push("/u02")}
             className="hover:text-primary"

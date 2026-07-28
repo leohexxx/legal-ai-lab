@@ -25,10 +25,11 @@ class Settings(BaseSettings):
     raw_data_path: Path = Path("data/raw")
     normalized_data_path: Path = Path("data/normalized")
 
-    # LLM API（阶段 1 起用）
-    llm_api_key: str = ""
-    llm_api_base: str = ""
-    llm_model: str = ""
+    # LLM API（DeepSeek 配置）
+    llm_api_key: str = "sk-0afad2bc0acb439cbaccfe58fe1f9c13"
+    llm_api_base: str = "https://api.deepseek.com/v1"
+    llm_model: str = "deepseek-chat"
+    llm_timeout: int = 30
 
     # 审计日志
     audit_log_enabled: bool = True

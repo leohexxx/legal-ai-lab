@@ -1,0 +1,736 @@
+{
+  "$schema": "./knowledge_graph_schema.json",
+  "version": "1.0.0",
+  "lastUpdated": "2026-07-28",
+  "description": "劳动法领域知识图谱 — 覆盖劳动合同、工资报酬、劳动关系认定、社保福利、辞退裁员、工伤赔偿、休息休假、竞业限制、女职工保护、集体争议、程序时效共 11 个一级分类",
+  "categories": [
+    {
+      "categoryId": "contract_conclusion",
+      "level1": "劳动合同",
+      "level2": "订立",
+      "displayName": "劳动合同订立纠纷",
+      "keywords": ["未签合同", "拒绝签订", "不签合同", "合同条款不公", "试用期", "不签劳动合同", "没签合同", "没有合同", "合同不公平", "霸王条款"],
+      "relatedQuestions": [
+        "公司不跟我签劳动合同怎么办",
+        "没签合同能要双倍工资吗",
+        "试用期不签合同合法吗",
+        "合同条款不公平能改吗"
+      ],
+      "requiredFields": ["employerName", "hireDate", "contractStatus", "contractTerms"],
+      "relevantLaws": [
+        {"law": "劳动合同法", "articles": ["第10条", "第14条", "第19条", "第82条"]}
+      ],
+      "excludeFrom": ["salary_arrears", "illegal_termination"]
+    },
+    {
+      "categoryId": "contract_renewal",
+      "level1": "劳动合同",
+      "level2": "续签",
+      "displayName": "合同到期不续签",
+      "keywords": ["不续签", "合同到期不续签", "不再续约", "合同到期不续约", "公司说不续合同", "合同到期公司不续", "拒绝续签", "到期不续"],
+      "relatedQuestions": [
+        "公司不续签合同是否需要赔偿",
+        "合同到期公司不续签有补偿吗",
+        "不续签合同要提前多久通知",
+        "连续签了两次合同到期不续签怎么办"
+      ],
+      "requiredFields": ["contractPeriod", "hasNotice", "reasonForNonRenewal", "yearsOfService", "contractSignCount"],
+      "relevantLaws": [
+        {"law": "劳动合同法", "articles": ["第44条", "第46条", "第47条", "第14条"]}
+      ],
+      "excludeFrom": ["salary_arrears", "illegal_termination"]
+    },
+    {
+      "categoryId": "contract_termination_by_employer",
+      "level1": "劳动合同",
+      "level2": "解除",
+      "displayName": "劳动合同解除纠纷",
+      "keywords": ["单方解除", "协商解除", "解除通知", "违法解除", "公司单方面解除", "被迫解除", "解除合同", "主动解除"],
+      "relatedQuestions": [
+        "公司单方面解除合同合法吗",
+        "协商解除合同能拿补偿吗",
+        "被迫解除合同怎么举证",
+        "解除通知怎么才算有效送达"
+      ],
+      "requiredFields": ["terminationDate", "terminationReason", "terminationParty", "noticePeriod", "severancePaid"],
+      "relevantLaws": [
+        {"law": "劳动合同法", "articles": ["第36条", "第37条", "第38条", "第39条", "第40条", "第41条", "第48条"]}
+      ],
+      "excludeFrom": ["salary_arrears"]
+    },
+    {
+      "categoryId": "contract_expiration",
+      "level1": "劳动合同",
+      "level2": "终止",
+      "displayName": "劳动合同到期终止纠纷",
+      "keywords": ["合同到期终止", "终止条件", "终止补偿", "合同自然到期", "到期终止", "合同终止"],
+      "relatedQuestions": [
+        "合同到期终止有补偿吗",
+        "哪些情况下合同到期不能终止",
+        "合同终止后还能要补偿吗"
+      ],
+      "requiredFields": ["contractEndDate", "terminationReason", "yearsOfService"],
+      "relevantLaws": [
+        {"law": "劳动合同法", "articles": ["第44条", "第45条", "第46条"]}
+      ],
+      "excludeFrom": ["illegal_termination"]
+    },
+    {
+      "categoryId": "contract_change",
+      "level1": "劳动合同",
+      "level2": "变更",
+      "displayName": "劳动合同变更纠纷",
+      "keywords": ["岗位变更", "工作地点变更", "薪资变更", "调岗", "降薪", "调动工作", "变更合同", "单方变更"],
+      "relatedQuestions": [
+        "公司可以单方面调岗吗",
+        "降薪需要经过我同意吗",
+        "工作地点变更能拒绝吗",
+        "调岗后工资降低怎么办"
+      ],
+      "requiredFields": ["changeType", "changeReason", "hasAgreed", "originalTerms", "newTerms"],
+      "relevantLaws": [
+        {"law": "劳动合同法", "articles": ["第35条", "第40条"]}
+      ],
+      "excludeFrom": []
+    },
+    {
+      "categoryId": "salary_arrears",
+      "level1": "工资报酬",
+      "level2": "欠薪",
+      "displayName": "拖欠工资纠纷",
+      "keywords": ["拖欠工资", "克扣工资", "拒不支付", "欠薪", "不发工资", "工资不发", "扣工资", "少发工资", "工资没发", "拖欠"],
+      "relatedQuestions": [
+        "公司拖欠工资怎么维权",
+        "拖欠工资能要赔偿吗",
+        "欠薪需要收集什么证据",
+        "拖欠工资劳动仲裁流程"
+      ],
+      "requiredFields": ["employerName", "workplace", "baseSalary", "salaryPeriod", "arrearsStart", "arrearsEnd", "totalOwed", "hasNegotiated"],
+      "relevantLaws": [
+        {"law": "劳动法", "articles": ["第五十条"]},
+        {"law": "劳动合同法", "articles": ["第三十条", "第八十五条"]},
+        {"law": "工资支付暂行规定", "articles": ["第七条"]}
+      ],
+      "excludeFrom": ["contract_renewal", "illegal_termination"]
+    },
+    {
+      "categoryId": "overtime",
+      "level1": "工资报酬",
+      "level2": "加班费",
+      "displayName": "加班费纠纷",
+      "keywords": ["加班费", "加班工资", "工作日加班", "休息日加班", "法定节假日加班", "加班不给钱", "加班费怎么算", "加班补偿"],
+      "relatedQuestions": [
+        "加班费怎么计算",
+        "公司不给加班费怎么办",
+        "周末加班怎么算工资",
+        "法定节假日加班三倍工资吗",
+        "加班费的仲裁时效多久"
+      ],
+      "requiredFields": ["workSchedule", "overtimeType", "overtimeHours", "payMethod", "hasOvertimeRecord"],
+      "relevantLaws": [
+        {"law": "劳动法", "articles": ["第四十四条"]},
+        {"law": "劳动合同法", "articles": ["第三十一条"]}
+      ],
+      "excludeFrom": ["salary_arrears"]
+    },
+    {
+      "categoryId": "minimum_wage",
+      "level1": "工资报酬",
+      "level2": "最低工资",
+      "displayName": "最低工资标准纠纷",
+      "keywords": ["最低工资", "低于最低工资标准", "工资低于最低标准", "低于最低工资", "底薪低于最低工资"],
+      "relatedQuestions": [
+        "工资低于最低工资标准怎么办",
+        "最低工资包括社保和公积金吗",
+        "试用期工资可以低于最低工资吗"
+      ],
+      "requiredFields": ["actualSalary", "localMinWage", "salaryPeriod"],
+      "relevantLaws": [
+        {"law": "劳动法", "articles": ["第四十八条"]},
+        {"law": "最低工资规定", "articles": ["第三条", "第十二条"]}
+      ],
+      "excludeFrom": []
+    },
+    {
+      "categoryId": "bonus_commission",
+      "level1": "工资报酬",
+      "level2": "奖金提成",
+      "displayName": "奖金提成纠纷",
+      "keywords": ["年终奖", "绩效奖金", "销售提成", "项目奖金", "不发奖金", "提成不给", "绩效工资", "奖金不发"],
+      "relatedQuestions": [
+        "公司不发年终奖合法吗",
+        "销售提成不发怎么维权",
+        "离职后还能要年终奖吗",
+        "绩效奖金公司可以随意扣吗"
+      ],
+      "requiredFields": ["bonusType", "bonusAmount", "bonusPolicy", "hasWrittenAgreement"],
+      "relevantLaws": [
+        {"law": "劳动合同法", "articles": ["第十七条"]},
+        {"law": "工资支付暂行规定", "articles": ["第九条"]}
+      ],
+      "excludeFrom": ["salary_arrears"]
+    },
+    {
+      "categoryId": "de_facto_relation",
+      "level1": "劳动关系认定",
+      "level2": "事实劳动关系",
+      "displayName": "事实劳动关系认定",
+      "keywords": ["事实劳动关系", "无合同但构成劳动关系", "没有合同但在上班", "实际工作", "事实用工"],
+      "relatedQuestions": [
+        "没有签合同怎么证明劳动关系",
+        "事实劳动关系怎么认定",
+        "哪些证据可以证明事实劳动关系"
+      ],
+      "requiredFields": ["hasWorked", "workDuration", "hasSupervision", "hasSalaryPayment", "evidenceTypes"],
+      "relevantLaws": [
+        {"law": "劳动合同法", "articles": ["第10条"]},
+        {"law": "关于确立劳动关系有关事项的通知", "articles": ["第一条", "第二条"]}
+      ],
+      "excludeFrom": []
+    },
+    {
+      "categoryId": "dual_relation",
+      "level1": "劳动关系认定",
+      "level2": "双重劳动关系",
+      "displayName": "双重劳动关系纠纷",
+      "keywords": ["双重劳动关系", "同时在两家公司工作", "兼职", "两份工作", "第二职业"],
+      "relatedQuestions": [
+        "同时在两家公司上班合法吗",
+        "公司能禁止员工兼职吗",
+        "双重劳动关系发生工伤谁负责"
+      ],
+      "requiredFields": ["primaryEmployer", "secondaryEmployer", "workSchedule", "hasConsent"],
+      "relevantLaws": [
+        {"law": "劳动合同法", "articles": ["第39条", "第69条", "第91条"]}
+      ],
+      "excludeFrom": []
+    },
+    {
+      "categoryId": "dispatch",
+      "level1": "劳动关系认定",
+      "level2": "劳务派遣",
+      "displayName": "劳务派遣纠纷",
+      "keywords": ["劳务派遣", "派遣关系", "同工同酬", "连带责任", "派遣工", "外派", "劳务公司"],
+      "relatedQuestions": [
+        "劳务派遣和正式员工有什么区别",
+        "劳务派遣能转正吗",
+        "劳务派遣被辞退有补偿吗",
+        "派遣员工能要求同工同酬吗"
+      ],
+      "requiredFields": ["dispatchCompany", "workCompany", "dispatchPeriod", "salaryComparison", "contractType"],
+      "relevantLaws": [
+        {"law": "劳动合同法", "articles": ["第57条", "第58条", "第59条", "第62条", "第63条", "第92条"]},
+        {"law": "劳务派遣暂行规定", "articles": ["第四条", "第七条", "第十二条"]}
+      ],
+      "excludeFrom": []
+    },
+    {
+      "categoryId": "part_time",
+      "level1": "劳动关系认定",
+      "level2": "非全日制用工",
+      "displayName": "非全日制用工纠纷",
+      "keywords": ["非全日制用工", "小时工", "兼职工", "临时工", "钟点工", "零工"],
+      "relatedQuestions": [
+        "非全日制用工需要签合同吗",
+        "小时工有加班费吗",
+        "非全日制用工可以随时辞退吗",
+        "兼职工受伤算工伤吗"
+      ],
+      "requiredFields": ["workHoursPerWeek", "hourlyRate", "hasContract", "workType"],
+      "relevantLaws": [
+        {"law": "劳动合同法", "articles": ["第68条", "第69条", "第70条", "第71条", "第72条"]}
+      ],
+      "excludeFrom": []
+    },
+    {
+      "categoryId": "social_insurance_payment",
+      "level1": "社保福利",
+      "level2": "社保缴纳",
+      "displayName": "社保缴纳纠纷",
+      "keywords": ["未缴社保", "少缴社保", "补缴社保", "不交社保", "社保欠缴", "社保基数低", "没交社保"],
+      "relatedQuestions": [
+        "公司不交社保怎么办",
+        "社保基数按最低标准交合法吗",
+        "怎么要求公司补缴社保",
+        "没交社保能要求赔偿吗"
+      ],
+      "requiredFields": ["insuredStatus", "missedMonths", "hasPaidByEmployer", "complaintResult", "salaryBase"],
+      "relevantLaws": [
+        {"law": "社会保险法", "articles": ["第58条", "第60条", "第63条", "第86条"]}
+      ],
+      "excludeFrom": ["salary_arrears"]
+    },
+    {
+      "categoryId": "housing_fund",
+      "level1": "社保福利",
+      "level2": "公积金",
+      "displayName": "住房公积金纠纷",
+      "keywords": ["未缴公积金", "公积金提取", "不交公积金", "公积金欠缴", "公积金基数", "住房公积金"],
+      "relatedQuestions": [
+        "公司不交公积金合法吗",
+        "公积金怎么提取",
+        "公积金可以补缴吗",
+        "离职后公积金怎么处理"
+      ],
+      "requiredFields": ["fundStatus", "missedMonths", "hasApplied", "extractionReason"],
+      "relevantLaws": [
+        {"law": "住房公积金管理条例", "articles": ["第15条", "第20条", "第24条", "第37条"]}
+      ],
+      "excludeFrom": []
+    },
+    {
+      "categoryId": "medical_insurance",
+      "level1": "社保福利",
+      "level2": "医疗保险",
+      "displayName": "医疗保险纠纷",
+      "keywords": ["医疗期", "病假工资", "医保报销", "医疗期待遇", "生病工资怎么算", "病假工资标准"],
+      "relatedQuestions": [
+        "医疗期工资怎么算",
+        "病假期间公司能开除吗",
+        "医疗期有多长",
+        "医保报销比例是多少"
+      ],
+      "requiredFields": ["diagnosis", "medicalPeriod", "salaryDuringSickLeave", "insuranceType"],
+      "relevantLaws": [
+        {"law": "企业职工患病或非因工负伤医疗期规定", "articles": ["第三条", "第四条", "第五条"]},
+        {"law": "关于贯彻执行劳动法若干问题的意见", "articles": ["第59条"]}
+      ],
+      "excludeFrom": []
+    },
+    {
+      "categoryId": "pension",
+      "level1": "社保福利",
+      "level2": "养老保险",
+      "displayName": "养老保险纠纷",
+      "keywords": ["养老金", "缴费年限", "退休金", "养老保险断缴", "养老金领取条件"],
+      "relatedQuestions": [
+        "养老保险需要缴满多少年",
+        "换工作养老保险断缴了怎么办",
+        "养老金怎么计算"
+      ],
+      "requiredFields": ["insuredYears", "insuredStatus", "age", "retirementPlan"],
+      "relevantLaws": [
+        {"law": "社会保险法", "articles": ["第16条", "第17条"]}
+      ],
+      "excludeFrom": []
+    },
+    {
+      "categoryId": "illegal_termination",
+      "level1": "辞退裁员",
+      "level2": "违法辞退",
+      "displayName": "违法辞退纠纷",
+      "keywords": ["无故开除", "孕期辞退", "歧视性辞退", "违法辞退", "被开除", "被辞退", "无故解雇", "开除", "公司开除我"],
+      "relatedQuestions": [
+        "公司无故开除我怎么赔偿",
+        "孕期被辞退能要求多少赔偿",
+        "违法辞退的赔偿金怎么算",
+        "被辞退后怎么维权"
+      ],
+      "requiredFields": ["terminationDate", "terminationReason", "noticePeriod", "severancePaid", "isPregnant", "isInMedicalPeriod"],
+      "relevantLaws": [
+        {"law": "劳动合同法", "articles": ["第42条", "第47条", "第48条", "第87条"]}
+      ],
+      "excludeFrom": ["salary_arrears", "contract_renewal"]
+    },
+    {
+      "categoryId": "severance_pay",
+      "level1": "辞退裁员",
+      "level2": "经济补偿",
+      "displayName": "经济补偿金纠纷",
+      "keywords": ["经济补偿", "N+1", "2N", "赔偿金计算", "离职补偿", "遣散费", "裁员补偿", "补偿金怎么算"],
+      "relatedQuestions": [
+        "经济补偿金N+1怎么算",
+        "什么情况下可以拿2N赔偿",
+        "离职补偿金要交税吗",
+        "工作一年被辞退能拿多少补偿"
+      ],
+      "requiredFields": ["yearsOfService", "averageSalary", "terminationReason", "noticePeriod"],
+      "relevantLaws": [
+        {"law": "劳动合同法", "articles": ["第47条", "第48条", "第87条", "第97条"]}
+      ],
+      "excludeFrom": []
+    },
+    {
+      "categoryId": "layoff_procedure",
+      "level1": "辞退裁员",
+      "level2": "裁员程序",
+      "displayName": "经济性裁员程序纠纷",
+      "keywords": ["经济性裁员", "裁员报备", "优先留用", "公司裁员", "规模裁员", "裁员补偿", "被裁员"],
+      "relatedQuestions": [
+        "公司经济性裁员合法吗",
+        "裁员需要提前多久通知",
+        "裁员哪些人不能被裁",
+        "裁员补偿标准是什么"
+      ],
+      "requiredFields": ["layoffScale", "layoffReason", "hasReported", "hasNegotiated", "severanceOffered"],
+      "relevantLaws": [
+        {"law": "劳动合同法", "articles": ["第41条", "第42条", "第46条"]}
+      ],
+      "excludeFrom": []
+    },
+    {
+      "categoryId": "resignation_certificate",
+      "level1": "辞退裁员",
+      "level2": "离职证明",
+      "displayName": "离职证明纠纷",
+      "keywords": ["不开离职证明", "离职证明内容争议", "离职证明", "不给离职证明", "离职证明怎么写"],
+      "relatedQuestions": [
+        "公司不给开离职证明怎么办",
+        "离职证明能不能写负面评价",
+        "没有离职证明影响入职吗"
+      ],
+      "requiredFields": ["hasRequested", "refusalReason", "impactOnNewJob"],
+      "relevantLaws": [
+        {"law": "劳动合同法", "articles": ["第50条", "第89条"]}
+      ],
+      "excludeFrom": []
+    },
+    {
+      "categoryId": "injury_identification",
+      "level1": "工伤赔偿",
+      "level2": "工伤认定",
+      "displayName": "工伤认定纠纷",
+      "keywords": ["工伤认定条件", "申报流程", "工伤认定争议", "不承认工伤", "工伤申报", "工伤鉴定", "工作中受伤"],
+      "relatedQuestions": [
+        "工作中受伤怎么认定工伤",
+        "公司不承认工伤怎么办",
+        "工伤认定需要什么材料",
+        "上下班路上受伤算工伤吗"
+      ],
+      "requiredFields": ["injuryDate", "injuryCause", "injuryLocation", "hasReported", "employerResponse"],
+      "relevantLaws": [
+        {"law": "工伤保险条例", "articles": ["第14条", "第15条", "第16条", "第17条", "第18条", "第19条"]}
+      ],
+      "excludeFrom": []
+    },
+    {
+      "categoryId": "disability_grade",
+      "level1": "工伤赔偿",
+      "level2": "伤残等级",
+      "displayName": "伤残等级鉴定纠纷",
+      "keywords": ["伤残鉴定", "鉴定标准", "对应赔偿", "伤残等级", "劳动能力鉴定", "评残"],
+      "relatedQuestions": [
+        "伤残等级怎么鉴定",
+        "不同伤残等级赔偿标准是多少",
+        "对鉴定结果不服怎么办",
+        "伤残鉴定需要多少钱"
+      ],
+      "requiredFields": ["hasIdentified", "disabilityGrade", "identificationAuthority", "employerCooperation"],
+      "relevantLaws": [
+        {"law": "工伤保险条例", "articles": ["第21条", "第22条", "第23条", "第26条"]},
+        {"law": "劳动能力鉴定标准", "articles": []}
+      ],
+      "excludeFrom": []
+    },
+    {
+      "categoryId": "lump_sum_compensation",
+      "level1": "工伤赔偿",
+      "level2": "一次性赔偿",
+      "displayName": "一次性工伤赔偿纠纷",
+      "keywords": ["一次性伤残补助金", "医疗补助金", "一次性赔偿", "工伤赔偿标准", "伤残赔偿"],
+      "relatedQuestions": [
+        "工伤一次性伤残补助金怎么算",
+        "一次性医疗补助金条件是什么",
+        "离职后还能要工伤赔偿吗"
+      ],
+      "requiredFields": ["disabilityGrade", "averageSalary", "hasLeftCompany", "employerPaid"],
+      "relevantLaws": [
+        {"law": "工伤保险条例", "articles": ["第35条", "第36条", "第37条"]}
+      ],
+      "excludeFrom": []
+    },
+    {
+      "categoryId": "death_compensation",
+      "level1": "工伤赔偿",
+      "level2": "工亡赔偿",
+      "displayName": "工亡赔偿纠纷",
+      "keywords": ["工亡认定", "赔偿标准", "工亡", "因工死亡", "死亡赔偿", "丧葬补助金", "供养亲属抚恤金"],
+      "relatedQuestions": [
+        "工亡赔偿标准是多少",
+        "工亡认定需要哪些材料",
+        "工亡赔偿包括哪些项目",
+        "未参保工亡怎么赔偿"
+      ],
+      "requiredFields": ["deathDate", "deathCause", "hasDependents", "dependentCount", "hasInsurance"],
+      "relevantLaws": [
+        {"law": "工伤保险条例", "articles": ["第39条", "第40条", "第41条"]}
+      ],
+      "excludeFrom": []
+    },
+    {
+      "categoryId": "annual_leave",
+      "level1": "休息休假",
+      "level2": "年休假",
+      "displayName": "年休假纠纷",
+      "keywords": ["年休假", "应休未休", "年假天数折算", "年假", "带薪年假", "年假没休", "年假补偿"],
+      "relatedQuestions": [
+        "年假没休完能折算工资吗",
+        "年假有几天",
+        "离职时未休年假怎么补偿",
+        "公司不让休年假怎么办"
+      ],
+      "requiredFields": ["yearsOfService", "leaveDaysUsed", "leaveDaysEntitled", "employerPolicy"],
+      "relevantLaws": [
+        {"law": "职工带薪年休假条例", "articles": ["第三条", "第四条", "第五条"]},
+        {"law": "企业职工带薪年休假实施办法", "articles": ["第十条", "第十一条", "第十二条"]}
+      ],
+      "excludeFrom": []
+    },
+    {
+      "categoryId": "sick_personal_leave",
+      "level1": "休息休假",
+      "level2": "病假事假",
+      "displayName": "病假事假纠纷",
+      "keywords": ["病假工资", "事假规定", "病假", "事假", "请病假", "请事假", "病假被扣工资", "事假扣工资"],
+      "relatedQuestions": [
+        "病假工资怎么发",
+        "事假扣工资标准是什么",
+        "请病假需要什么证明材料",
+        "公司不批病假怎么办"
+      ],
+      "requiredFields": ["leaveType", "leaveDays", "hasMedicalCert", "salaryDeduction"],
+      "relevantLaws": [
+        {"law": "关于贯彻执行劳动法若干问题的意见", "articles": ["第59条"]},
+        {"law": "工资支付暂行规定", "articles": ["第十二条"]}
+      ],
+      "excludeFrom": []
+    },
+    {
+      "categoryId": "marriage_funeral_leave",
+      "level1": "休息休假",
+      "level2": "婚丧假",
+      "displayName": "婚丧假纠纷",
+      "keywords": ["婚假", "丧假", "婚假天数", "丧假天数", "婚假工资", "丧假工资"],
+      "relatedQuestions": [
+        "婚假有几天",
+        "丧假有几天",
+        "婚丧假期间工资怎么算",
+        "再婚能休婚假吗"
+      ],
+      "requiredFields": ["leaveType", "leaveDays", "hasEmployerApproved"],
+      "relevantLaws": [
+        {"law": "关于国营企业��工请婚丧假和路程假问题的规定", "articles": []}
+      ],
+      "excludeFrom": []
+    },
+    {
+      "categoryId": "maternity_paternity_leave",
+      "level1": "休息休假",
+      "level2": "产假陪产假",
+      "displayName": "产假和陪产假纠纷",
+      "keywords": ["产假天数", "产假工资", "陪产假", "产假", "生育假", "产假待遇"],
+      "relatedQuestions": [
+        "产假有几天",
+        "产假工资谁发",
+        "陪产假男方有几天",
+        "产假期间公司能开除吗"
+      ],
+      "requiredFields": ["expectedDate", "leaveDays", "hasSocialInsurance", "employerPolicy"],
+      "relevantLaws": [
+        {"law": "女职工劳动保护特别规定", "articles": ["第七条", "第八条"]},
+        {"law": "社会保险法", "articles": ["第五十六条"]}
+      ],
+      "excludeFrom": []
+    },
+    {
+      "categoryId": "non_compete_agreement",
+      "level1": "竞业限制",
+      "level2": "竞业协议",
+      "displayName": "竞业限制协议纠纷",
+      "keywords": ["竞业协议", "竞业限制", "竞业协议效力", "竞业限制范围", "签了竞业协议", "竞业禁止"],
+      "relatedQuestions": [
+        "竞业限制协议有法律效力吗",
+        "竞业限制的范围能多宽",
+        "离职后竞业限制还生效吗",
+        "违反竞业协议要赔多少钱"
+      ],
+      "requiredFields": ["hasSigned", "restrictionScope", "restrictionPeriod", "compensationAmount"],
+      "relevantLaws": [
+        {"law": "劳动合同法", "articles": ["第23条", "第24条"]}
+      ],
+      "excludeFrom": []
+    },
+    {
+      "categoryId": "non_compete_compensation",
+      "level1": "竞业限制",
+      "level2": "竞业补偿",
+      "displayName": "竞业限制补偿金纠纷",
+      "keywords": ["竞业补偿金", "补偿金标准", "支付方式", "竞业限制补偿", "竞业补偿没给", "竞业补偿金标准"],
+      "relatedQuestions": [
+        "竞业限制补偿金每月给多少",
+        "公司不付竞业补偿金怎么办",
+        "竞业补偿金什么时候发",
+        "没收到竞业补偿金还要遵守协议吗"
+      ],
+      "requiredFields": ["agreedAmount", "actualAmount", "paymentStatus", "paymentFrequency"],
+      "relevantLaws": [
+        {"law": "劳动合同法", "articles": ["第23条"]},
+        {"law": "最高人民法院劳动争议司法解释（四）", "articles": ["第六条", "第七条", "第八条"]}
+      ],
+      "excludeFrom": []
+    },
+    {
+      "categoryId": "pregnancy_protection",
+      "level1": "女职工保护",
+      "level2": "孕期保护",
+      "displayName": "孕期女职工保护纠纷",
+      "keywords": ["孕期辞退", "孕期调岗", "产检假", "怀孕被辞退", "孕妇被开除", "孕期工作安排", "产检时间"],
+      "relatedQuestions": [
+        "怀孕期间公司能辞退吗",
+        "孕期检查算上班时间吗",
+        "公司可以给孕妇调岗降薪吗",
+        "怀孕被辞退能索赔多少"
+      ],
+      "requiredFields": ["isPregnant", "gestationalWeeks", "hasBeenTerminated", "hasBeenTransferred"],
+      "relevantLaws": [
+        {"law": "女职工劳动保护特别规定", "articles": ["第五条", "第六条"]},
+        {"law": "劳动合同法", "articles": ["第42条"]}
+      ],
+      "excludeFrom": ["illegal_termination"]
+    },
+    {
+      "categoryId": "maternity_benefits",
+      "level1": "女职工保护",
+      "level2": "产期待遇",
+      "displayName": "产期待遇纠纷",
+      "keywords": ["产假工资", "生育津贴", "产假待遇", "生育保险", "产假期间工资"],
+      "relatedQuestions": [
+        "产假工资和生育津贴能同时拿吗",
+        "生育津贴怎么领",
+        "公司不发产假工资怎么办",
+        "没有生育保险产假工资谁出"
+      ],
+      "requiredFields": ["hasSocialInsurance", "salaryBeforeLeave", "maternityLeaveDays", "employerPaid"],
+      "relevantLaws": [
+        {"law": "女职工劳动保护特别规定", "articles": ["第七条", "第八条"]},
+        {"law": "社会保险法", "articles": ["第五十三条", "第五十四条", "第五十五条", "第五十六条"]}
+      ],
+      "excludeFrom": []
+    },
+    {
+      "categoryId": "nursing_period",
+      "level1": "女职工保护",
+      "level2": "哺乳期",
+      "displayName": "哺乳期女职工保护纠纷",
+      "keywords": ["哺乳假", "哺乳时间", "哺乳期工作安排", "哺乳期辞退", "喂奶时间", "哺乳期权益"],
+      "relatedQuestions": [
+        "哺乳期每天有多长时间的哺乳假",
+        "哺乳期公司能辞退吗",
+        "哺乳期可以拒绝加班吗"
+      ],
+      "requiredFields": ["hasInfant", "infantAge", "hasBeenTerminated", "hasReasonableSchedule"],
+      "relevantLaws": [
+        {"law": "女职工劳动保护特别规定", "articles": ["第五条", "第九条", "第十条"]},
+        {"law": "劳动合同法", "articles": ["第42条"]}
+      ],
+      "excludeFrom": ["illegal_termination"]
+    },
+    {
+      "categoryId": "collective_bargaining",
+      "level1": "集体争议",
+      "level2": "集体协商",
+      "displayName": "集体协商纠纷",
+      "keywords": ["集体合同", "工会协商", "集体协商", "工会维权", "职工代表", "集体谈判"],
+      "relatedQuestions": [
+        "工会能代表员工协商吗",
+        "集体合同怎么生效",
+        "公司不配合集体协商怎么办"
+      ],
+      "requiredFields": ["hasUnion", "hasCollectiveContract", "bargainingTopic"],
+      "relevantLaws": [
+        {"law": "劳动合同法", "articles": ["第51条", "第52条", "第53条", "第54条", "第55条", "第56条"]}
+      ],
+      "excludeFrom": []
+    },
+    {
+      "categoryId": "mass_arrears",
+      "level1": "集体争议",
+      "level2": "群体性欠薪",
+      "displayName": "群体性欠薪纠纷",
+      "keywords": ["群体性欠薪", "多名员工被欠薪", "集体欠薪", "公司欠全体", "全公司欠薪", "集体讨薪"],
+      "relatedQuestions": [
+        "公司欠全体员工工资怎么办",
+        "群体性欠薪有什么特殊程序",
+        "群体性欠薪找哪个部门最快"
+      ],
+      "requiredFields": ["affectedCount", "totalAmount", "hasUnionAction", "hasReportedToLabor"],
+      "relevantLaws": [
+        {"law": "劳动合同法", "articles": []},
+        {"law": "劳动保障监察条例", "articles": ["第10条"]}
+      ],
+      "excludeFrom": []
+    },
+    {
+      "categoryId": "strike_work_stoppage",
+      "level1": "集体争议",
+      "level2": "停工怠工",
+      "displayName": "停工怠工纠纷",
+      "keywords": ["停工", "怠工", "合法罢工", "罢工", "集体停工", "罢工工资"],
+      "relatedQuestions": [
+        "员工集体停工合法吗",
+        "罢工期间有工资吗",
+        "公司能因为罢工开除员工吗"
+      ],
+      "requiredFields": ["stoppageReason", "participantCount", "hasNegotiation", "duration"],
+      "relevantLaws": [
+        {"law": "劳动法", "articles": []}
+      ],
+      "excludeFrom": []
+    },
+    {
+      "categoryId": "arbitration_period",
+      "level1": "程序时效",
+      "level2": "仲裁时效",
+      "displayName": "劳动仲裁时效纠纷",
+      "keywords": ["仲裁时效", "一年时效", "时效中断", "时效中止", "仲裁过期", "劳动仲裁时效多久", "超过仲裁时效"],
+      "relatedQuestions": [
+        "劳动仲裁时效是多久",
+        "仲裁时效过了还能申请吗",
+        "什么情况仲裁时效中断",
+        "在职期间仲裁时效怎么算"
+      ],
+      "requiredFields": ["disputeDate", "lastWorkDate", "hasApplied", "interruptionReason"],
+      "relevantLaws": [
+        {"law": "劳动争议调解仲裁法", "articles": ["第27条"]}
+      ],
+      "excludeFrom": []
+    },
+    {
+      "categoryId": "litigation_period",
+      "level1": "程序时效",
+      "level2": "诉讼时效",
+      "displayName": "劳动诉讼时效纠纷",
+      "keywords": ["诉讼时效", "起诉期限", "上诉期限", "不服仲裁起诉", "收到裁决书后几天起诉"],
+      "relatedQuestions": [
+        "不服仲裁裁决多久内起诉",
+        "劳动诉讼时效是多久",
+        "上诉期限过了怎么办"
+      ],
+      "requiredFields": ["arbitrationDate", "awardReceivedDate", "hasFiledLawsuit"],
+      "relevantLaws": [
+        {"law": "劳动争议调解仲裁法", "articles": ["第47条", "第48条", "第50条"]}
+      ],
+      "excludeFrom": []
+    },
+    {
+      "categoryId": "evidence_preservation",
+      "level1": "程序时效",
+      "level2": "证据保存",
+      "displayName": "证据保存与举证责任纠纷",
+      "keywords": ["证据保存", "证据种类", "举证责任", "证据保全", "证据不足", "什么证据有效", "举证"],
+      "relatedQuestions": [
+        "劳动仲裁需要什么证据",
+        "举证责任怎么分配",
+        "证据怎么保全",
+        "聊天记录能做证据吗",
+        "录音证据合法吗"
+      ],
+      "requiredFields": ["evidenceTypes", "hasPreserved", "burdenOfProof"],
+      "relevantLaws": [
+        {"law": "劳动争议调解仲裁法", "articles": ["第6条"]},
+        {"law": "最高人民法院关于民事诉讼证据的若干规定", "articles": []}
+      ],
+      "excludeFrom": []
+    }
+  ]
+}

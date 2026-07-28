@@ -307,3 +307,109 @@ export const ACTION_PLAN_TYPE_LABELS: Record<ActionPlan["type"], string> = {
   arbitration: "仲裁",
   litigation: "诉讼",
 };
+
+// ============================================================
+// ---- 对话相关（新增，用于交互重构） ----
+// ============================================================
+
+export type MessageRole = "user" | "assistant" | "system";
+
+export interface AlternativeCategory {
+  categoryId: string;
+  reason: string;
+}
+
+export interface IntentResult {
+  categoryId: string;
+  level1: string;
+  level2: string;
+  confidence: number;
+  extractedKeywords: string[];
+  summary: string;
+  alternativeCategories?: AlternativeCategory[];
+}
+
+export interface FollowUpField {
+  fieldId: string;
+  label: string;
+  type: "text" | "select" | "date" | "number";
+  options?: { label: string; value: string }[];
+  required: boolean;
+  userResponse?: string;
+}
+
+export interface ChatMessage {
+  id: string;
+  role: MessageRole;
+  content: string;
+  createdAt: string;
+  intent?: IntentResult;
+  fields?: FollowUpField[];
+  isLoading?: boolean;
+}
+
+export interface IdentifyResponse {
+  categoryId: string;
+  level1: string;
+  level2: string;
+  confidence: number;
+  extractedKeywords: string[];
+  summary: string;
+  alternativeCategories: AlternativeCategory[];
+}
+
+export interface AskResponse {
+  message: string;
+  intent: IntentResult | null;
+  fields: FollowUpField[];
+  isComplete: boolean;
+}
+
+export interface SkipResponse {
+  message: string;
+  factsExtracted: { label: string; value: string; source: string }[];
+}
+
+/** 知识图谱分类（供前端展示） */
+export interface KnowledgeCategory {
+  categoryId: string;
+  level1: string;
+  level2: string;
+  displayName: string;
+  keywords: string[];
+  requiredFields: string[];
+}
+
+export interface LawReference {
+  law: string;
+  articles: string[];
+  summary?: string;
+  content?: string;
+}
+
+/** 统一 API 响应格式 */
+export interface ApiResponse<T> {
+  code: number;
+  data: T;
+  message: string;
+}
+
+/** 意图识别请求 */
+export interface IdentifyRequest {
+  message: string;
+}
+
+/** 对话/追问请求 */
+export interface AskRequest {
+  message: string;
+  contextId?: string;
+  categoryId?: string;
+  collectedFields?: Record<string, string>;
+}
+
+/** 跳过追问请求 */
+export interface SkipRequest {
+  contextId: string;
+  categoryId: string;
+  collectedFields: Record<string, string>;
+}

@@ -16,9 +16,9 @@ vi.mock("next/navigation", () => ({
 
 // Mock React.use() for pages with async params (jsdom不支持 React 19 use(Promise))
 vi.mock("react", async (importOriginal) => {
-  const actual = await importOriginal();
+  const actual = await importOriginal<typeof import("react")>();
   return {
-    ...actual,
+    ...(actual as Record<string, unknown>),
     use: (promise: unknown) => {
       // 如果是 Promise，同步返回默认值
       if (promise && typeof (promise as Promise<unknown>).then === "function") {
@@ -26,7 +26,7 @@ vi.mock("react", async (importOriginal) => {
       }
       return promise;
     },
-  };
+  } as typeof actual;
 });
 
 // Mock next/font/google
@@ -116,7 +116,7 @@ describe("U05 - 事实确认", () => {
     useCaseStore.setState({
       isHydrated: true,
       isLoading: false,
-      hasError: false,
+      // hasError was removed from CaseStore interface
       facts: [
         { id: "f01", label: "用人单位", value: "北京某某科技有限公司", status: "confirmed", category: "主体" },
         { id: "f02", label: "欠薪期间", value: "2026年1月至6月", status: "pending", category: "欠薪" },

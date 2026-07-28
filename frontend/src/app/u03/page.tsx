@@ -1,13 +1,16 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 import { useCaseStore } from "@/lib/store";
+import { fetchCategories } from "@/lib/api";
+import type { KnowledgeCategory } from "@/lib/types";
 
-const DOMAINS = [
-  { id: "labor", label: "劳动争议", desc: "欠薪、合同、辞退、社保等" },
-  { id: "civil", label: "民事纠纷", desc: "合同纠纷、借贷、侵权等（基础支持）" },
+const PROVINCES = [
+  "北京市", "上海市", "广东省", "浙江省", "江苏省",
+  "四川省", "湖北省", "湖南省", "福建省", "山东省",
+  "河南省", "河北省", "安徽省", "重庆市", "其他省份",
 ];
 
 const GOALS = [
@@ -17,45 +20,42 @@ const GOALS = [
   { id: "find_lawyer", label: "找律师", desc: "需要推荐律师或法律服务机构" },
 ];
 
-const PROVINCES = [
-  "北京市", "上海市", "广东省", "浙江省", "江苏省",
-  "四川省", "湖北省", "湖南省", "福建省", "山东省",
-  "河南省", "河北省", "安徽省", "重庆市", "其他省份",
-];
-
-const URGENT_ITEMS = [
-  { id: "personal_safety", label: "涉及人身安全" },
-  { id: "mass_event", label: "群体性事件" },
-  { id: "deadline_approaching", label: "临近法定期限" },
-  { id: "none", label: "无紧急情况" },
-];
-
 function U03Content() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const query = searchParams.get("q") || "";
 
-  const [domain, setDomain] = useState("labor");
+  const [categories, setCategories] = useState<KnowledgeCategory[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState<string>("");
   const [province, setProvince] = useState("");
   const [city, setCity] = useState("");
   const [goal, setGoal] = useState("");
-  const [urgent, setUrgent] = useState<string[]>([]);
   const [customProvince, setCustomProvince] = useState("");
   const [showOther, setShowOther] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
-  const isComplete = domain && province && goal;
+  const isComplete = selectedCategory && province && goal;
 
-  const handleUrgentToggle = (id: string) => {
-    if (id === "none") {
-      setUrgent(["none"]);
-      return;
-    }
-    setUrgent((prev) => {
-      const filtered = prev.filter((x) => x !== "none");
-      if (filtered.includes(id)) return filtered.filter((x) => x !== id);
-      return [...filtered, id];
-    });
-  };
+  // 加载分类数据
+  useEffect(() => {
+    fetchCategories()
+      .then((data) => {
+        setCategories(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setError(err instanceof Error ? err.message : "加载分类失败");
+        setLoading(false);
+      });
+  }, []);
+
+  // 按 level1 分组
+  const grouped = categories.reduce<Record<string, KnowledgeCategory[]>>((acc, cat) => {
+    if (!acc[cat.level1]) acc[cat.level1] = [];
+    acc[cat.level1].push(cat);
+    return acc;
+  }, {});
 
   const handleProceed = () => {
     if (!isComplete) return;
@@ -66,14 +66,15 @@ function U03Content() {
       status: "draft",
       createdAt: new Date().toISOString().slice(0, 10),
       updatedAt: new Date().toISOString().slice(0, 16).replace("T", " "),
-      domain,
+      domain: "labor",
       province: province === "other" ? customProvince : province,
       city,
       goal,
-      urgent: urgent.filter((u) => u !== "none"),
+      urgent: [],
       description: query,
     });
-    router.push("/u04");
+    // 跳转到 U04 对话页，带上 categoryId
+    router.push(`/u04?q=${encodeURIComponent(query)}&categoryId=${selectedCategory}`);
   };
 
   return (
@@ -83,47 +84,65 @@ function U03Content() {
           <button onClick={() => router.back()} className="text-sm text-gray-400 hover:text-primary transition-colors">
             ← 返回
           </button>
-          <span className="text-sm font-medium text-gray-900">确认案情基本信息</span>
+          <span className="text-sm font-medium text-gray-900">确认问题类型</span>
         </div>
       </div>
 
       <main className="flex-1 px-4 py-8 max-w-2xl mx-auto w-full">
         {/* 原始问题 */}
         {query && (
-          <div className="bg-gray-50 rounded-xl px-4 py-3 mb-8">
-            <p className="text-xs text-gray-400 mb-1">您描述的问题</p>
-            <p className="text-sm text-gray-700">{query}</p>
+          <div className="bg-amber-50 rounded-xl px-4 py-3 mb-8">
+            <p className="text-xs text-amber-700 mb-1">我们暂时无法准确识别您的问题，请手动选择分类</p>
+            <p className="text-sm text-amber-900">{query}</p>
           </div>
         )}
 
-        {/* 领域 */}
-        <section className="mb-8">
-          <h2 className="text-sm font-medium text-gray-900 mb-1">问题领域</h2>
-          <p className="text-xs text-gray-400 mb-3">系统建议的领域，您可以修改</p>
-          <div className="grid grid-cols-2 gap-3">
-            {DOMAINS.map((d) => (
-              <button
-                key={d.id}
-                onClick={() => setDomain(d.id)}
-                className={`text-left rounded-xl border px-4 py-3 transition-colors ${
-                  domain === d.id
-                    ? "border-primary bg-primary-light/30"
-                    : "border-gray-200 bg-white hover:border-gray-300"
-                }`}
-              >
-                <div className="text-sm font-medium text-gray-900">{d.label}</div>
-                <div className="text-xs text-gray-400 mt-0.5">{d.desc}</div>
-              </button>
-            ))}
+        {/* 加载中 */}
+        {loading && (
+          <div className="flex items-center justify-center py-12">
+            <span className="inline-block w-5 h-5 border-2 border-primary border-t-transparent rounded-full animate-spin mr-2" />
+            <span className="text-sm text-gray-400">加载分类中...</span>
           </div>
-          {domain !== "labor" && (
-            <div className="mt-3 bg-amber-50 rounded-xl px-4 py-3">
-              <p className="text-xs text-amber-800">
-                当前对劳动争议（欠薪）场景提供深度支持。您选择的领域将获得基础材料整理服务，分析深度可能受限。
-              </p>
+        )}
+
+        {/* 错误状态 */}
+        {error && (
+          <div className="bg-red-50 rounded-xl px-4 py-3 mb-6">
+            <p className="text-sm text-red-700">{error}</p>
+          </div>
+        )}
+
+        {/* 分类选择 */}
+        {!loading && Object.keys(grouped).length > 0 && (
+          <section className="mb-8">
+            <h2 className="text-sm font-medium text-gray-900 mb-3">选择问题类型</h2>
+            <div className="space-y-4">
+              {Object.entries(grouped).map(([level1, cats]) => (
+                <div key={level1}>
+                  <h3 className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-2">{level1}</h3>
+                  <div className="grid grid-cols-1 gap-2">
+                    {cats.map((cat) => (
+                      <button
+                        key={cat.categoryId}
+                        onClick={() => setSelectedCategory(cat.categoryId)}
+                        className={`text-left rounded-xl border px-4 py-3 transition-colors ${
+                          selectedCategory === cat.categoryId
+                            ? "border-primary bg-primary-light/30"
+                            : "border-gray-200 bg-white hover:border-gray-300"
+                        }`}
+                      >
+                        <div className="text-sm font-medium text-gray-900">{cat.displayName}</div>
+                        <div className="text-xs text-gray-400 mt-0.5">
+                          {cat.keywords.slice(0, 4).join("、")}
+                        </div>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              ))}
             </div>
-          )}
-        </section>
+          </section>
+        )}
 
         {/* 地区 */}
         <section className="mb-8">
@@ -134,10 +153,7 @@ function U03Content() {
             {PROVINCES.slice(0, 9).map((p) => (
               <button
                 key={p}
-                onClick={() => {
-                  setProvince(p);
-                  setShowOther(false);
-                }}
+                onClick={() => { setProvince(p); setShowOther(false); }}
                 className={`text-xs rounded-lg border py-2 transition-colors ${
                   province === p && !showOther
                     ? "border-primary bg-primary-light/30 text-primary"
@@ -148,14 +164,9 @@ function U03Content() {
               </button>
             ))}
             <button
-              onClick={() => {
-                setProvince("other");
-                setShowOther(true);
-              }}
+              onClick={() => { setProvince("other"); setShowOther(true); }}
               className={`text-xs rounded-lg border py-2 transition-colors ${
-                showOther
-                  ? "border-primary bg-primary-light/30 text-primary"
-                  : "border-gray-200 bg-white text-gray-600 hover:border-gray-300"
+                showOther ? "border-primary bg-primary-light/30 text-primary" : "border-gray-200 bg-white text-gray-600 hover:border-gray-300"
               }`}
             >
               其他省份
@@ -163,22 +174,10 @@ function U03Content() {
           </div>
 
           {showOther && (
-            <input
-              type="text"
-              value={customProvince}
-              onChange={(e) => setCustomProvince(e.target.value)}
-              placeholder="请输入省份"
-              className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:border-primary focus:ring-2 focus:ring-primary-light focus:outline-none"
-            />
+            <input type="text" value={customProvince} onChange={(e) => setCustomProvince(e.target.value)} placeholder="请输入省份" className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:border-primary focus:ring-2 focus:ring-primary-light focus:outline-none" />
           )}
 
-          <input
-            type="text"
-            value={city}
-            onChange={(e) => setCity(e.target.value)}
-            placeholder="城市（选填，我们也可以帮您确认）"
-            className="mt-2 w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:border-primary focus:ring-2 focus:ring-primary-light focus:outline-none"
-          />
+          <input type="text" value={city} onChange={(e) => setCity(e.target.value)} placeholder="城市（选填）" className="mt-2 w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:border-primary focus:ring-2 focus:ring-primary-light focus:outline-none" />
         </section>
 
         {/* 目标 */}
@@ -191,9 +190,7 @@ function U03Content() {
                 key={g.id}
                 onClick={() => setGoal(g.id)}
                 className={`text-left rounded-xl border px-4 py-3 transition-colors ${
-                  goal === g.id
-                    ? "border-primary bg-primary-light/30"
-                    : "border-gray-200 bg-white hover:border-gray-300"
+                  goal === g.id ? "border-primary bg-primary-light/30" : "border-gray-200 bg-white hover:border-gray-300"
                 }`}
               >
                 <div className="text-sm font-medium text-gray-900">{g.label}</div>
@@ -203,47 +200,13 @@ function U03Content() {
           </div>
         </section>
 
-        {/* 紧急事项 */}
-        <section className="mb-8">
-          <h2 className="text-sm font-medium text-gray-900 mb-1">是否存在紧急情况</h2>
-          <p className="text-xs text-gray-400 mb-3">可多选，如都不符合请选"无紧急情况"</p>
-          <div className="space-y-2">
-            {URGENT_ITEMS.map((item) => (
-              <label
-                key={item.id}
-                className={`flex items-center gap-3 rounded-xl border px-4 py-3 cursor-pointer transition-colors ${
-                  urgent.includes(item.id)
-                    ? "border-primary bg-primary-light/30"
-                    : "border-gray-200 bg-white hover:border-gray-300"
-                }`}
-              >
-                <input
-                  type="checkbox"
-                  checked={urgent.includes(item.id)}
-                  onChange={() => handleUrgentToggle(item.id)}
-                  className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary-light"
-                />
-                <span className="text-sm text-gray-700">{item.label}</span>
-              </label>
-            ))}
-          </div>
-          {urgent.includes("personal_safety") || urgent.includes("mass_event") ? (
-            <div className="mt-3 bg-red-50 rounded-xl px-4 py-3">
-              <p className="text-xs text-red-700">
-                您标记了紧急情况。如涉及人身安全，请立即拨打 110；如为群体性事件，建议同时咨询执业律师。
-                系统分析可能无法替代紧急法律行动。
-              </p>
-            </div>
-          ) : null}
-        </section>
-
         {/* 提交 */}
         <button
           onClick={handleProceed}
           disabled={!isComplete}
           className="w-full rounded-xl bg-primary text-white py-3 text-sm font-medium hover:bg-[#3C3489] disabled:bg-gray-200 disabled:text-gray-400 transition-colors"
         >
-          {isComplete ? "确认信息，开始采集详细事实 →" : "请先选择领域、地区和目标"}
+          {isComplete ? "确认选择，开始对话咨询 →" : "请先选择问题类型、地区和目标"}
         </button>
       </main>
     </div>

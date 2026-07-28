@@ -1,0 +1,71 @@
+sequenceDiagram
+    participant U as 用户
+    participant UI as U04 对话页面
+    participant CS as ChatStore (前端)
+    participant API as api.ts
+    participant BE as FastAPI Backend
+    participant KG as Knowledge Service
+    participant LLM as DeepSeek Pro
+
+    U->>UI: 输入自然语言问题
+    UI->>CS: chatStore.sendMessage(text)
+    CS->>API: POST /chat/identify {message}
+    API->>BE: 转发请求
+    BE->>KG: 加载知识图谱分类
+    BE->>LLM: 构建 Prompt + 调用 DeepSeek
+    LLM-->>BE: 返回 IntentResult (JSON)
+    BE-->>API: 200 {categoryId, confidence, summary...}
+    API-->>CS: 更新 currentIntent, 添加 assistant message
+    CS-->>UI: 重新渲染 → 显示系统气泡(含意图标签 + 确认按钮)
+    UI-->>U: 展示 "我理解您的问题是...正确吗？"
+
+    alt 用户确认
+        U->>UI: 点击 ✅ 正确，继续
+        UI->>CS: chatStore.confirmIntent()
+        CS->>API: POST /chat/ask {message, categoryId, contextId}
+        API->>BE: 转发确认消息
+        BE->>KG: 查询 requiredFields
+        BE->>LLM: 构建追问 Prompt
+        LLM-->>BE: 返回追问字段列表
+        BE-->>API: 200 {message, fields[...], isComplete: false}
+        API-->>CS: 更新 messages + fields
+        CS-->>UI: 显示追问问题 + 输入组件
+
+        alt 用户补充信息
+            U->>UI: 补充信息
+            UI->>CS: 提交回答
+            CS->>API: POST /chat/ask {message, fields}
+            API->>BE: 转发
+            BE->>LLM: 处理回答
+            LLM-->>BE: 回复
+            BE-->>API: 200 {message, fields, isComplete}
+            API-->>CS: 更新
+            CS-->>UI: 显示下一轮追问或结果
+        else 用户选择跳过
+            U->>UI: 点击"不补充，直接看结果"
+            UI->>CS: chatStore.skipFollowUp()
+            CS->>API: POST /chat/skip {contextId, categoryId, collectedFields}
+            API->>BE: 转发
+            BE->>LLM: 生成初步分析
+            LLM-->>BE: 返回分析结果
+            BE-->>API: 200 {message, factsExtracted}
+            API-->>CS: 更新
+            CS-->>UI: 显示初步分析结果
+        end
+
+    else 用户纠正
+        U->>UI: 点击 ❌ 不太对，纠正
+        UI->>CS: 设置 isConfirmed = false
+        U->>UI: 输入正确分类或重新描述
+        UI->>CS: chatStore.correctIntent(newText)
+        CS->>API: POST /chat/identify {message: newText}
+        API->>BE: 转发
+        BE->>LLM: 重新意图识别
+        LLM-->>BE: 新 IntentResult
+        BE-->>API: 返回
+        API-->>CS: 更新 currentIntent
+        CS-->>UI: 重新显示新标签 + 确认
+    end
+
+    U->>UI: 点击"查看完整结果"
+    UI->>U: 导航到 U05 事实确认页
