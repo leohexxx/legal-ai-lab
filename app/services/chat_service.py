@@ -141,7 +141,7 @@ class ChatService:
             intent=intent,
             fields=[],
             isComplete=False,
-        )
+            contextId=context_id)
 
     # ---- 跳过追问 ----
 
@@ -388,7 +388,7 @@ class ChatService:
                 intent=None,
                 fields=[],
                 isComplete=False,
-            )
+            contextId=context_id)
 
         display_name = category.get("displayName", "")
         required_fields = category.get("requiredFields", [])
@@ -409,7 +409,7 @@ class ChatService:
                     intent=None,
                     fields=[],
                     isComplete=True,
-                )
+            contextId=context_id)
 
         # 信息不足，需要追问
         followup_fields = self.knowledge_service.get_category_fields(category_id)
@@ -423,7 +423,7 @@ class ChatService:
                 intent=None,
                 fields=[],
                 isComplete=True,
-            )
+            contextId=context_id)
 
         # 每次最多追问 3 个
         next_fields = remaining[:3]
@@ -442,7 +442,7 @@ class ChatService:
             intent=None,
             fields=next_fields,
             isComplete=False,
-        )
+            contextId=context_id)
 
     async def _handle_follow_up(
         self,
@@ -464,7 +464,7 @@ class ChatService:
                     intent=None,
                     fields=[],
                     isComplete=True,
-                )
+            contextId=context_id)
 
         # 继续追问未收集的字段
         followup_fields = self.knowledge_service.get_category_fields(
@@ -478,7 +478,7 @@ class ChatService:
                 intent=None,
                 fields=[],
                 isComplete=True,
-            )
+            contextId=context_id)
 
         next_fields = remaining[:3]
         field_text = "\n".join([
@@ -495,7 +495,7 @@ class ChatService:
             intent=None,
             fields=next_fields,
             isComplete=False,
-        )
+            contextId=context_id)
 
     def _get_field_label(self, field_id: str, category: dict) -> str:
         """获取字段的显示标签."""

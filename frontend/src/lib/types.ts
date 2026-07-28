@@ -363,6 +363,7 @@ export interface AskResponse {
   intent: IntentResult | null;
   fields: FollowUpField[];
   isComplete: boolean;
+  contextId?: string;
 }
 
 export interface SkipResponse {

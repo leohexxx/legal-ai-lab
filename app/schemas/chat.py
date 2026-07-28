@@ -60,6 +60,7 @@ class AskResponse(BaseModel):
     intent: IdentifyResponse | None = Field(None, description="意图识别结果（首次识别时附带）")
     fields: list[FollowUpField] = Field(default_factory=list, description="追问字段列表")
     isComplete: bool = Field(default=False, description="信息是否已足够，可以生成结果")
+    contextId: str | None = Field(None, description="对话上下文 ID（后端生成，首次确认时返回）")
 
 
 class SkipRequest(BaseModel):

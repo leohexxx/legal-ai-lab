@@ -3,7 +3,7 @@ import httpx
 import json
 import sys
 
-BASE = "http://localhost:8000/api/v1"
+BASE = "http://localhost:8002/api/v1"
 
 passed = 0
 failed = 0

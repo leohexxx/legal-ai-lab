@@ -24,6 +24,7 @@ interface ChatStore {
   contextId: string | null;
   currentCategoryId: string | null;
   collectedFields: Record<string, string>;
+  skipResult: { message: string; factsExtracted: { label: string; value: string; source: string }[] } | null;
 
   // 动作
   addMessage: (msg: ChatMessage) => void;
@@ -50,6 +51,7 @@ const INITIAL_STATE = {
   contextId: null,
   currentCategoryId: null,
   collectedFields: {},
+  skipResult: null,
 };
 
 // ---- Helper — 生成唯一消息 ID ----
@@ -147,6 +149,11 @@ export const useChatStore = create<ChatStore>()((set, get) => ({
           collectedFields: state.collectedFields,
         });
 
+        // 如果后端返回了 contextId，使用它（首次确认后）
+        if (!state.contextId && response.contextId) {
+          set({ contextId: response.contextId });
+        }
+
         // 移除 loading 消息
         set((s) => ({
           messages: s.messages.filter((m) => m.id !== loadingMsg.id),
@@ -212,26 +219,9 @@ export const useChatStore = create<ChatStore>()((set, get) => ({
         collectedFields: state.collectedFields,
       });
 
-      // 保存 contextId（首次确认时后端生成）
-      if (!state.contextId) {
-        // 从响应中推断 — 实际 contextId 由后端返回，但我们的协议中 AskResponse
-        // 不直接返回 contextId。这里在首次调用 ask 后需要后端返回 contextId。
-        // 由于后端 AskResponse 不包含 contextId，我们用 categoryId 做临时标识，
-        // 后续 sendMessage 会带上 contextId。
-        // 实际上首次 ask 后端会创建 context。但我们无法从响应获取 contextId。
-        // 解决方案：先 identify 再 ask。这里需要在确认后获得 contextId。
-        // 做个临时方案：前端生成一个 contextId 前缀，后端如果接收到空 contextId 会创建。
-        // 但从 ask 响应中无法获取后端生成的 contextId。
-        // 改用方案：先调用 identify 获得意图，再调 ask 时传空 contextId，后端创建并返回。
-        // 但当前 API 设计 AskResponse 不返回 contextId...
-        // 简单方案：用 categoryId + timestamp 作为本地 contextId 标记，
-        // 后续调用 ask 时传空 contextId，后端每次创建新的上下文...
-        // 这不行。更好的方案：修改 ask 接口返回 contextId。
-        // 但不改后端了。用一个 hack: 前端生成一个 contextId 传给后端，
-        // 后端如果收到 contextId 就用它。
-        // 策略：前端生成一个唯一 ID 作为 contextId
-        const generatedId = `ctx-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`;
-        set({ contextId: generatedId });
+      // 保存 contextId（首次确认时从后端响应获取）
+      if (!state.contextId && response.contextId) {
+        set({ contextId: response.contextId });
       }
 
       // 移除 loading 消息
@@ -304,6 +294,9 @@ export const useChatStore = create<ChatStore>()((set, get) => ({
       set((s) => ({
         messages: s.messages.filter((m) => m.id !== loadingMsg.id),
       }));
+
+      // 存储 skip 结果，供 U04 页面跳转 U05 时使用
+      set({ skipResult: response });
 
       const systemMsg: ChatMessage = {
         id: generateId(),

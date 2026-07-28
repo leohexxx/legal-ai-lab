@@ -10,7 +10,7 @@ import {
   SkipButton,
   ContextSummary,
 } from "@/components/chat";
-import type { IntakeData, FactItem } from "@/lib/types";
+import type { IntakeData, FactItem, FactStatus } from "@/lib/types";
 
 // ============================================================
 // 旧版表单模式（8 步流程）
@@ -495,12 +495,10 @@ function ChatMode() {
   const handleFieldResponse = (fieldId: string, value: string) => {
     useChatStore.getState().updateCollectedFields({ [fieldId]: value });
 
-    // 自动发送���息来收集字段
+    // 自动提交字段值给后端 API — 发送消息触发下一轮
     if (contextId && currentCategoryId) {
-      // 把用户的回答当作一条消息发送给 ask API
       const store = useChatStore.getState();
-      const updatedFields = { ...store.collectedFields, [fieldId]: value };
-      store.updateCollectedFields({ [fieldId]: value });
+      store.sendMessage(`${fieldId}：${value}`);
     }
   };
 
@@ -509,7 +507,21 @@ function ChatMode() {
   };
 
   const handleViewResult = () => {
-    router.push("/u05");
+    // 如果已有 skip 结果，映射到案件事实并存入 caseStore
+    const state = useChatStore.getState();
+    if (state.skipResult && state.skipResult.factsExtracted.length > 0) {
+      const facts: FactItem[] = state.skipResult.factsExtracted.map((f, idx) => ({
+        id: `fact-skip-${Date.now()}-${idx}`,
+        label: f.label,
+        value: f.value,
+        status: 'pending' as FactStatus,
+        category: '对话提取',
+        source: f.source,
+      }));
+      const caseStore = useCaseStore.getState();
+      caseStore.setFacts(facts);
+    }
+    router.push('/u05');
   };
 
   const handleReset = () => {
@@ -623,7 +635,7 @@ function ChatMode() {
       </div>
     </div>
   );
-}
+  }
 
 // ============================================================
 // 页面入口 — 根据 mode 参数切换对话/表单模式
