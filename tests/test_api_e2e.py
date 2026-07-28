@@ -49,7 +49,7 @@ if data:
     cats = data.get("data", [])
     check("Categories list is non-empty", len(cats) > 0, f"count={len(cats)}")
     # Check expected count (data has 40 categories)
-    check("Has 40 categories", len(cats) == 40, f"count={len(cats)}")
+    check("Has 42 categories", len(cats) == 42, f"count={len(cats)}")
     first = cats[0]
     check("First has categoryId", "categoryId" in first)
     check("First has level1", "level1" in first)
