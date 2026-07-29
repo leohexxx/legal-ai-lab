@@ -1,0 +1,34 @@
+rule_id: "labor_rule_009"
+title: "离职证明出具规则"
+domain: "labor"
+topic: "resignation_certificate"
+related_categories: ["resignation_certificate"]
+jurisdiction: "全国"
+effective_from: "2008-01-01"
+effective_to: null
+status: "active"
+conditions:
+  - "用人单位与劳动者解除或终止劳动合同"
+  - "劳动者要求用人单位出具解除或终止证明"
+legal_effect: "用人单位应当在解除或终止劳动合同时出具解除或终止劳动合同的证明，并在十五日内为劳动者办理档案和社会保险关系转移手续。证明应当写明劳动合同期限、解除或终止的日期、工作岗位、在本单位的工作年限。用人单位不出具证明造成劳动者损害的，应当承担赔偿责任。"
+exceptions:
+  - "劳动者拒绝办理离职交接手续的，不影响用人单位出具证明的义务"
+  - "用人单位可依法在证明中如实记载解除原因（如因严重违纪被解除）"
+facts_required:
+  - "劳动合同解除或终止的事实"
+  - "劳动者是否提出开具证明的请求"
+  - "用人单位是否已出具证明"
+  - "劳动者是否因缺少证明遭受实际损失"
+evidence_related:
+  - "解除或终止劳动合同通知书"
+  - "劳动者要求开具证明的书面申请或记录"
+  - "用人单位出具的离职证明（如已出具）"
+  - "新单位录用通知书（因缺少证明被取消）"
+  - "档案及社保转移记录"
+procedure_related:
+  - "劳动监察投诉"
+  - "劳动仲裁（主张出具证明或赔偿损失）"
+  - "法院诉讼"
+law_reference:
+  law: "中华人民共和国劳动合同法"
+  articles: ["第五十条", "第八十九条"]
