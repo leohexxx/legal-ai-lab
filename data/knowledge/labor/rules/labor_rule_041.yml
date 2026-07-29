@@ -1,0 +1,43 @@
+rule_id: labor_rule_041
+title: 陪产假规则
+domain: labor
+topic: maternity_paternity_leave
+related_categories:
+- annual_leave
+- sick_personal_leave
+- marriage_funeral_leave
+- maternity_paternity_leave
+jurisdiction: 全国
+effective_from: '2016-01-01'
+effective_to: null
+status: active
+conditions:
+- 男职工的配偶生育需要陪护
+- 用人单位拒绝批准陪产假
+- 用人单位在陪产假期间扣发工资
+- 男职工申请陪产假被以旷工为由解除劳动合同
+legal_effect: 目前全国性法律未统一规定陪产假天数，由各省人口与计划生育条例分别规定，一般为7天至30天不等（如北京15天、上海10天、广东15天、四川20天、河南30天等）。陪产假视为出勤，休假期间工资照发，福利待遇不变。用人单位不得以男职工申请陪产假为由扣发工资、奖金或按旷工处理。违反规定的，劳动者可向劳动监察投诉或申请劳动仲裁。
+exceptions:
+- 各地产假天数不同，以当地人口与计划生育条例为准
+- 部分省份规定陪产假须在配偶生育后一定期限内休完
+- 陪产假期间一般不含法定节假日
+facts_required:
+- 男职工的配偶是否生育
+- 当地陪产假的具体天数规定
+- 用人单位是否批准陪产假
+- 用人单位是否扣发陪产假期间工资
+- 用人单位是否以旷工为由处理
+evidence_related:
+- 结婚证
+- 配偶生育证明（出生医学证明）
+- 请假申请记录
+- 考勤记录
+- 工资条
+procedure_related:
+- 劳动监察投诉
+- 劳动仲裁（主张陪产假工资）
+- 法院诉讼
+law_reference:
+  law: 各省人口与计划生育条例
+  articles:
+  - （具体条款视各省规定）

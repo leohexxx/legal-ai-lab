@@ -1,0 +1,44 @@
+rule_id: labor_rule_021
+title: 试用期期限规则
+domain: labor
+topic: probation_dispute
+related_categories:
+- contract_conclusion
+- contract_renewal
+- contract_termination_by_employer
+- contract_expiration
+- contract_change
+- probation_dispute
+jurisdiction: 全国
+effective_from: '2008-01-01'
+effective_to: null
+status: active
+conditions:
+- 劳动合同期限三个月以上不满一年的，试用期不超过一个月
+- 劳动合同期限一年以上不满三年的，试用期不超过二个月
+- 三年以上固定期限和无固定期限劳动合同，试用期不超过六个月
+- 以完成一定工作任务为期限的劳动合同或者劳动合同期限不满三个月的，约定试用期
+- 同一用人单位与同一劳动者重复约定试用期
+legal_effect: 试用期最长为六个月，且同一用人单位与同一劳动者只能约定一次试用期。试用期包含在劳动合同期限内，劳动合同仅约定试用期的，试用期不成立，该期限为劳动合同期限。违法约定的试用期已经履行的，由用人单位以劳动者试用期满月工资为标准，按已经履行的超过法定试用期的期间向劳动者支付赔偿金。
+exceptions:
+- 以完成一定工作任务为期限的劳动合同或合同期限不满三个月，不得约定试用期
+- 非全日制用工双方当事人不得约定试用期
+- 试用期不成立的，该期限视为劳动合同期限
+facts_required:
+- 劳动合同期限长度
+- 约定的试用期长度
+- 是否为同一用人单位第二次约定试用期
+- 是否属于不得约定试用期的情形
+evidence_related:
+- 劳动合同
+- 试用期考核记录
+- 工资条（试用期工资记录）
+procedure_related:
+- 劳动仲裁（主张违法约定试用期的赔偿金）
+- 法院诉讼
+law_reference:
+  law: 中华人民共和国劳动合同法
+  articles:
+  - 第十九条
+  - 第二十条
+  - 第八十三条

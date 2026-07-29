@@ -1,0 +1,46 @@
+rule_id: labor_rule_024
+title: 劳动合同续签规则
+domain: labor
+topic: contract_renewal
+related_categories:
+- contract_conclusion
+- contract_renewal
+- contract_termination_by_employer
+- contract_expiration
+- contract_change
+- probation_dispute
+jurisdiction: 全国
+effective_from: '2008-01-01'
+effective_to: null
+status: active
+conditions:
+- 固定期限劳动合同期满，用人单位与劳动者续订劳动合同
+- 连续订立二次固定期限劳动合同，且劳动者没有法定解除情形
+- 劳动合同期满后劳动者仍在原用人单位工作，用人单位未表示异议
+- 用人单位在合同期满后不与劳动者续签
+legal_effect: 劳动合同期满后，用人单位维持或者提高劳动合同约定条件续订劳动合同，劳动者不同意续订的，用人单位无需支付经济补偿；用人单位降低条件续订或不同意续订的，应支付经济补偿。连续订立二次固定期限劳动合同且劳动者无过失性辞退情形，续订时应订立无固定期限劳动合同。合同期满后继续用工超过一个月未续签的，用人单位应支付双倍工资。
+exceptions:
+- 劳动者主动不同意续订且用人单位维持或提高条件的，用人单位无需支付经济补偿
+- 用人单位决定不续订的，应支付经济补偿（按工作年限每年一个月工资）
+- 连续两次固定期限合同后，劳动者要求订立固定期限合同的除外
+facts_required:
+- 原劳动合同期限及到期日
+- 用人单位是否提出续签及续签条件
+- 劳动者是否同意续签
+- 此前订立固定期限合同的次数
+- 合同期满后是否继续用工
+evidence_related:
+- 劳动合同（含续签记录）
+- 续签通知书
+- 工作沟通记录（微信、邮件等）
+- 考勤记录（证明期满后继续工作）
+- 工资支付记录
+procedure_related:
+- 劳动仲裁（主张续签或经济补偿）
+- 法院诉讼
+law_reference:
+  law: 中华人民共和国劳动合同法
+  articles:
+  - 第十四条
+  - 第四十六条
+  - 第八十二条

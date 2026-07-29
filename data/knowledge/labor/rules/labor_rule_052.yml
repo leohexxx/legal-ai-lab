@@ -1,0 +1,45 @@
+rule_id: labor_rule_052
+title: 群体性欠薪维权规则
+domain: labor
+topic: mass_arrears
+related_categories:
+- collective_bargaining
+- mass_arrears
+- strike_work_stoppage
+jurisdiction: 全国
+effective_from: '2008-05-01'
+effective_to: null
+status: active
+conditions:
+- 同一用人单位对十名以上劳动者存在欠薪行为
+- 劳动者因同一事实申请劳动仲裁
+- 劳动者推举代表参加仲裁活动
+- 欠薪事实清楚且用人单位有转移资产迹象
+legal_effect: 发生劳动争议的劳动者一方在十人以上并有共同请求的，可以推举代表参加调解、仲裁或者诉讼活动。代表人数由仲裁委员会或法院根据案件情况确定，一般三至五名。群体性欠薪仲裁案件仲裁委员会可以优先立案、优先审理、优先裁决。劳动者可同时申请财产保全以防止用人单位转移资产。劳动监察部门可责令用人单位限期支付工资，逾期不支付的责令加付50%-100%赔偿金。
+exceptions:
+- 劳动者人数不足十人的，适用普通仲裁程序
+- 推举代表需经全体当事人书面授权
+- 群体性争议可先由劳动监察处理，不必然经过仲裁前置
+facts_required:
+- 欠薪涉及劳动者总人数
+- 每名劳动者的欠薪金额和时段
+- 劳动者的共同请求事项
+- 推举代表的授权情况
+- 用人单位是否有转移资产迹象
+evidence_related:
+- 劳动合同
+- 工资条
+- 考勤记录
+- 欠薪统计表
+- 推举代表授权委托书
+- 银行流水
+- 劳动监察责令改正通知书
+procedure_related:
+- 劳动监察投诉
+- 劳动仲裁（集体仲裁）
+- 法院诉讼
+- 申请财产保全
+law_reference:
+  law: 中华人民共和国劳动争议调解仲裁法
+  articles:
+  - 第七条

@@ -1,0 +1,44 @@
+rule_id: labor_rule_040
+title: 产假天数及待遇规则
+domain: labor
+topic: maternity_paternity_leave
+related_categories:
+- annual_leave
+- sick_personal_leave
+- marriage_funeral_leave
+- maternity_paternity_leave
+jurisdiction: 全国
+effective_from: '2012-04-28'
+effective_to: null
+status: active
+conditions:
+- 女职工生育需要休产假
+- 女职工怀孕未满4个月流产
+- 女职工怀孕满4个月流产
+- 女职工难产或生育多胞胎
+legal_effect: 女职工生育享受98天产假，其中产前可以休假15天；难产的增加产假15天；生育多胞胎的每多生育1个婴儿增加15天产假。女职工怀孕未满4个月流产的享受15天产假；怀孕满4个月流产的享受42天产假。同时，各地根据人口与计划生育条例在98天基础上增加生育奖励假（一般为30天至60天，如北京60天、上海30天、广东80天等），合计通常为128天至158天。产假期间工资或生育津贴按相关法规发放。
+exceptions:
+- 各地生育奖励假天数不同，以当地人口与计划生育条例为准
+- 产前休假计入98天产假内，不得提前休完导致产后假期减少
+- 产假包含法定节假日和休息日
+facts_required:
+- 预产期及实际分娩日期
+- 是否难产或生育多胞胎
+- 流产时怀孕周数
+- 当地生育奖励假规定
+- 用人单位是否批准产假并足额发放待遇
+evidence_related:
+- 医院诊断证明或出院小结
+- 生育医学证明
+- 请假申请记录
+- 工资条/生育津贴发放记录
+procedure_related:
+- 向用人单位申请产假
+- 向社保经办机构申领生育津贴
+- 劳动仲裁（产假待遇争议）
+- 法院诉讼
+law_reference:
+  law: 女职工劳动保护特别规定
+  articles:
+  - 第七条
+  - 第八条

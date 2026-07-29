@@ -1,0 +1,46 @@
+rule_id: labor_rule_025
+title: 事实劳动关系认定三要素标准
+domain: labor
+topic: de_facto_relation
+related_categories:
+- de_facto_relation
+- dual_relation
+- dispatch
+- part_time
+- labor_outstaffing
+jurisdiction: 全国
+effective_from: '2005-05-25'
+effective_to: null
+status: active
+conditions:
+- 用人单位和劳动者未签订书面劳动合同
+- 用人单位对劳动者进行日常管理和工作安排
+- 用人单位向劳动者支付劳动报酬
+- 劳动者提供的劳动是用人单位业务的组成部分
+legal_effect: 用人单位未与劳动者签订劳动合同，认定双方存在事实劳动关系时可参照以下凭证：工资支付记录或工资册、缴纳社会保险费的记录、工作证服务证等身份证明、招聘登记表报名表等招用记录、考勤记录、其他劳动者的证言等。其中工资支付凭证、社保记录、考勤记录等由用人单位负举证责任。
+exceptions:
+- 个人承包经营招用劳动者的，发包组织承担用工主体责任
+- 达到法定退休年龄并已享受基本养老保险待遇的，按劳务关系处理
+- 在校学生实习按劳务关系处理，一般不认定劳动关系
+facts_required:
+- 是否存在书面劳动合同
+- 用人单位是否对劳动者进行考勤、工作安排等管理
+- 工资由谁支付、以什么方式支付
+- 劳动者提供的劳动是否属于用人单位业务组成部分
+- 用人单位是否缴纳社会保险
+evidence_related:
+- 工资支付记录或银行流水
+- 社保缴费记录
+- 工作证/工牌
+- 考勤记录
+- 招聘登记表或入职登记表
+- 其他劳动者的证言
+- 工作沟通记录
+procedure_related:
+- 劳动仲裁（确认劳动关系）
+- 法院诉讼
+law_reference:
+  law: 劳动和社会保障部关于确立劳动关系有关事项的通知（劳社部发〔2005〕12号）
+  articles:
+  - 第一条
+  - 第二条

@@ -1,0 +1,42 @@
+rule_id: labor_rule_023
+title: 劳动合同必备条款规则
+domain: labor
+topic: contract_conclusion
+related_categories:
+- contract_conclusion
+- contract_renewal
+- contract_termination_by_employer
+- contract_expiration
+- contract_change
+- probation_dispute
+jurisdiction: 全国
+effective_from: '2008-01-01'
+effective_to: null
+status: active
+conditions:
+- 劳动合同缺少法定必备条款（用人信息、合同期限、工作内容、劳动报酬、社保等）
+- 劳动合同文本未交付劳动者持有
+- 用人单位提供的劳动合同文本未载明必备条款
+legal_effect: 劳动合同应当具备用人单位的名称住所和法定代表人、劳动者的姓名住址和居民身份证号、劳动合同期限、工作内容和工作地点、工作时间和休息休假、劳动报酬、社会保险、劳动保护劳动条件和职业危害防护等必备条款。缺少必备条款不影响合同效力，但由劳动行政部门责令改正；给劳动者造成损害的，应当承担赔偿责任。用人单位未将合同文本交付劳动者的，也由劳动行政部门责令改正。
+exceptions:
+- 非全日制用工可以不订立书面劳动合同
+- 缺少必备条款但合同已实际履行且双方无争议的，合同仍有效
+- 合同文本未交付劳动者但有其他证据证明合同内容的，不当然影响劳动关系认定
+facts_required:
+- 劳动合同是否具备全部法定必备条款
+- 用人单位是否将合同文本交付劳动者
+- 缺少的条款是否导致劳动者实际权益受损
+evidence_related:
+- 劳动合同
+- 工资条
+- 工作沟通记录（证明实际约定内容）
+- 劳动行政部门责令改正通知书（如有）
+procedure_related:
+- 劳动监察投诉
+- 劳动仲裁
+- 法院诉讼
+law_reference:
+  law: 中华人民共和国劳动合同法
+  articles:
+  - 第十七条
+  - 第八十一条

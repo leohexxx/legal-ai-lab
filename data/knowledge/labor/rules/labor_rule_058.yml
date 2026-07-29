@@ -1,0 +1,42 @@
+rule_id: labor_rule_058
+title: 劳动争议证据保全规则
+domain: labor
+topic: evidence_preservation
+related_categories:
+- arbitration_period
+- litigation_period
+- evidence_preservation
+jurisdiction: 全国
+effective_from: '2013-01-01'
+effective_to: null
+status: active
+conditions:
+- 证据可能灭失（如考勤记录、监控录像即将被覆盖）
+- 证据以后难以取得（如关键证人即将出国）
+- 用人单位可能转移或销毁控制中的证据
+- 劳动者无法自行获取用人单位掌握的证据
+legal_effect: 在证据可能灭失或者以后难以取得的情况下，当事人可以在仲裁或诉讼过程中申请证据保全。仲裁中的证据保全由仲裁委员会将申请提交证据所在地基层人民法院；诉讼中的证据保全由受理案件的人民法院负责。人民法院接受申请后，对情况紧急的必须在四十八小时内作出裁定；裁定采取保全措施的应当立即开始执行。申请证据保全的当事人可以提供担保，不提供担保的可驳回申请。因证据保全给他人造成损失的，由申请人承担赔偿责任。
+exceptions:
+- 证据保全一般需要申请人提供担保
+- 仲裁中的证据保全须通过仲裁委员会向法院申请
+- 因情况紧急须在四十八小时内作出裁定的，可以立即执行
+facts_required:
+- 需要保全的证据内容和形式
+- 证据是否面临灭失或难以取得的危险
+- 是否已申请仲裁或诉讼
+- 是否已提供保全担保
+- 证据是否由用人单位控制且劳动者无法获取
+evidence_related:
+- 证据保全申请书
+- 法院保全裁定书
+- 担保凭证
+- 被保全的证据清单
+procedure_related:
+- 向劳动仲裁委员会申请证据保全（转交法院）
+- 向人民法院申请证据保全
+law_reference:
+  law: 中华人民共和国民事诉讼法
+  articles:
+  - 第八十一条
+  - 第一百零一条
+  - 第一百零二条

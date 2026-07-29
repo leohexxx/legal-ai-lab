@@ -1,0 +1,42 @@
+rule_id: labor_rule_032
+title: 养老保险缴费年限规则
+domain: labor
+topic: pension
+related_categories:
+- social_insurance_payment
+- pension
+- medical_insurance
+- housing_fund
+jurisdiction: 全国
+effective_from: '2011-07-01'
+effective_to: null
+status: active
+conditions:
+- 参加基本养老保险的个人累计缴费不足十五年
+- 参加基本养老保险的个人累计缴费满十五年
+- 个人达到法定退休年龄但缴费不足十五年
+- 个人跨地区就业，养老保险关系转移接续
+legal_effect: 参加基本养老保险的个人，达到法定退休年龄时累计缴费满十五年的，按月领取基本养老金。累计缴费不足十五年的，可以缴费至满十五年，按月领取基本养老金；也可以转入新型农村社会养老保险或者城镇居民社会养老保险，按照国务院规定享受相应的养老保险待遇。个人跨统筹地区就业的，其基本养老保险关系随本人转移，缴费年限累计计算。
+exceptions:
+- 社会保险法实施前参保、延长缴费五年后仍不足十五年的，可以一次性缴费至满十五年
+- 个人因病或者非因工死亡的，其遗属可以领取丧葬补助金和抚恤金
+- 个人在达到法定退休年龄前离境定居的，其个人账户可以保留或一次性支付
+facts_required:
+- 个人参加基本养老保险的累计缴费年限
+- 是否已达到法定退休年龄
+- 个人账户累计储存额
+- 各参保地的缴费记录
+evidence_related:
+- 社保缴费记录
+- 养老保险个人账户对账单
+- 跨地区社保转移接续凭证
+procedure_related:
+- 向社保经办机构申请退休待遇核定
+- 向社保经办机构申请缴费或转移接续
+- 行政复议或行政诉讼（对社保经办决定不服）
+law_reference:
+  law: 中华人民共和国社会保险法
+  articles:
+  - 第十六条
+  - 第十七条
+  - 第十九条
