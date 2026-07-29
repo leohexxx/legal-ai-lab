@@ -1,0 +1,58 @@
+# GitHub Actions CI
+
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint:
+    name: Lint & Format Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install ruff mypy pydantic pydantic-settings
+      - name: Run ruff
+        run: ruff check .
+      - name: Run ruff format check
+        run: ruff format --check .
+      - name: Run mypy
+        run: mypy app/ --ignore-missing-imports
+
+  test:
+    name: Run Tests
+    runs-on: ubuntu-latest
+    needs: lint
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install fastapi uvicorn pydantic pydantic-settings httpx pytest pytest-asyncio
+      - name: Run tests
+        run: pytest tests/ -v
+
+  security:
+    name: Security Scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run bandit
+        run: |
+          pip install bandit
+          bandit -r app/ -f json -o bandit-report.json || true
+      - name: Check for secrets
+        run: |
+          git diff --name-only HEAD~1..HEAD 2>/dev/null | xargs -I{} sh -c 'grep -l "API_KEY\|SECRET\|PASSWORD\|PRIVATE_KEY" "{}" 2>/dev/null && echo "WARNING: Possible secret in {}" || true'

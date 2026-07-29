@@ -1,0 +1,119 @@
+{
+  "description": "程序卡.\n\n记录进入条件、主管机关、材料、步骤、\n可能结果、期限、地区差异与风险。",
+  "properties": {
+    "procedure_id": {
+      "description": "程序唯一标识",
+      "pattern": "^proc_[a-z0-9_]+$",
+      "title": "Procedure Id",
+      "type": "string"
+    },
+    "title": {
+      "description": "程序名称",
+      "title": "Title",
+      "type": "string"
+    },
+    "domain": {
+      "description": "法律领域",
+      "title": "Domain",
+      "type": "string"
+    },
+    "topic": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "主题",
+      "title": "Topic"
+    },
+    "prerequisites": {
+      "description": "进入条件列表",
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Prerequisites",
+      "type": "array"
+    },
+    "authority": {
+      "description": "主管机关",
+      "examples": [
+        "劳动监察大队"
+      ],
+      "title": "Authority",
+      "type": "string"
+    },
+    "required_materials": {
+      "description": "所需材料清单",
+      "items": {
+        "type": "string"
+      },
+      "title": "Required Materials",
+      "type": "array"
+    },
+    "steps": {
+      "description": "具体步骤（含说明、时限、注意事项）",
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Steps",
+      "type": "array"
+    },
+    "possible_outcomes": {
+      "description": "可能结果",
+      "items": {
+        "type": "string"
+      },
+      "title": "Possible Outcomes",
+      "type": "array"
+    },
+    "deadlines": {
+      "description": "期限说明（含法律依据）",
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Deadlines",
+      "type": "array"
+    },
+    "jurisdiction": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "适用地区",
+      "title": "Jurisdiction"
+    },
+    "risks": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "风险提示",
+      "title": "Risks"
+    }
+  },
+  "required": [
+    "procedure_id",
+    "title",
+    "domain",
+    "authority"
+  ],
+  "title": "ProcedureCard",
+  "type": "object"
+}

@@ -1,0 +1,109 @@
+{
+  "description": "案例卡.\n\n记录事实、争点、请求、证据、适用规则、\n裁判理由、结果、局限与权威来源。\n案例不能被写成普遍规则。",
+  "properties": {
+    "case_id": {
+      "description": "案例唯一标识",
+      "pattern": "^case_[a-z0-9_]+$",
+      "title": "Case Id",
+      "type": "string"
+    },
+    "case_number": {
+      "description": "案号",
+      "title": "Case Number",
+      "type": "string"
+    },
+    "court": {
+      "description": "审理法院",
+      "title": "Court",
+      "type": "string"
+    },
+    "judgment_date": {
+      "description": "裁判日期",
+      "format": "date",
+      "title": "Judgment Date",
+      "type": "string"
+    },
+    "domain": {
+      "description": "法律领域",
+      "title": "Domain",
+      "type": "string"
+    },
+    "topic": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "主题",
+      "title": "Topic"
+    },
+    "facts_abstract": {
+      "description": "事实摘要",
+      "title": "Facts Abstract",
+      "type": "string"
+    },
+    "dispute_focus": {
+      "description": "争议焦点",
+      "items": {
+        "type": "string"
+      },
+      "title": "Dispute Focus",
+      "type": "array"
+    },
+    "claims": {
+      "description": "当事人的请求",
+      "items": {
+        "type": "string"
+      },
+      "title": "Claims",
+      "type": "array"
+    },
+    "reasoning": {
+      "description": "裁判理由（尽量引用\"本院认为\"原文）",
+      "title": "Reasoning",
+      "type": "string"
+    },
+    "result": {
+      "description": "裁判结果",
+      "title": "Result",
+      "type": "string"
+    },
+    "applicable_rules": {
+      "description": "适用的法律规则引用",
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Applicable Rules",
+      "type": "array"
+    },
+    "source": {
+      "description": "案例来源",
+      "title": "Source",
+      "type": "string"
+    },
+    "limitations": {
+      "default": "个案结果不可直接类推。",
+      "description": "适用范围与局限说明",
+      "title": "Limitations",
+      "type": "string"
+    }
+  },
+  "required": [
+    "case_id",
+    "case_number",
+    "court",
+    "judgment_date",
+    "domain",
+    "facts_abstract",
+    "reasoning",
+    "result",
+    "source"
+  ],
+  "title": "CaseCard",
+  "type": "object"
+}

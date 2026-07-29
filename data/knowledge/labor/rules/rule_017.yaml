@@ -1,0 +1,35 @@
+# 规则卡 - 最低工资扣除项目规则
+# 来源：最低工资规定 第十二条
+# 关联主题：wage_arrears
+
+rule_id: "labor_rule_017"
+title: "最低工资扣除项目规则"
+domain: "labor"
+topic: "wage_arrears"
+jurisdiction: "全国"
+effective_from: "2004-03-01"
+effective_to: null
+status: "active"
+conditions:
+  - "用人单位向劳动者支付工资"
+  - "劳动者提供了正常劳动"
+legal_effect: "在劳动者提供正常劳动的情况下，用人单位支付的工资在剔除下列项目后不得低于当地最低工资标准：1）延长工作时间工资（加班费）；2）中班、夜班、高温、低温、井下、有毒有害等特殊工作环境下的津贴；3）法律、法规和国家规定的劳动者福利待遇。实行计件或提成工资的，在科学合理的劳动定额基础上不得低于相应的最低工资标准。"
+exceptions:
+  - "劳动者因本人原因在法定或约定工作时间内未提供正常劳动的，不适用本条"
+facts_required:
+  - "劳动者是否提供了正常劳动"
+  - "当地最低工资标准"
+  - "实际支付的月工资总额"
+  - "工资构成中是否包含加班费、特殊津贴等应剔除项目"
+evidence_related:
+  - "劳动合同"
+  - "工资条"
+  - "当地最低工资标准文件"
+  - "考勤记录"
+procedure_related:
+  - "劳动监察投诉"
+  - "劳动仲裁"
+  - "法院诉讼"
+source_id: "minimum_wage_regulation_2004"
+article_ref: "第十二条"
+review_status: "draft"

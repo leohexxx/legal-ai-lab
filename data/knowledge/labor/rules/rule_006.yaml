@@ -1,0 +1,35 @@
+# 规则卡 - 违法解除劳动合同赔偿规则（二倍经济补偿）
+# 来源：中华人民共和国劳动合同法 第八十七条
+# 关联主题：wage_arrears
+
+rule_id: "labor_rule_006"
+title: "违法解除劳动合同赔偿规则"
+domain: "labor"
+topic: "wage_arrears"
+jurisdiction: "全国"
+effective_from: "2008-01-01"
+effective_to: null
+status: "active"
+conditions:
+  - "用人单位违反劳动合同法规定解除或终止劳动合同"
+  - "劳动者不要求继续履行劳动合同或合同已无法继续履行"
+legal_effect: "用人单位应当按照经济补偿标准的二倍向劳动者支付赔偿金。赔偿金的计算年限自用工之日起计算，支付赔偿金后不再支付经济补偿。"
+exceptions:
+  - "劳动者要求继续履行且合同能够继续履行的，用人单位应当继续履行"
+  - "用人单位在起诉前已补正通知工会程序的，不视为违法解除"
+facts_required:
+  - "解除或终止劳动合同的具体原因和依据"
+  - "解除行为是否合法（是否符合法定条件和程序）"
+  - "劳动者在本单位的工作年限"
+  - "解除或终止前十二个月的月平均工资"
+evidence_related:
+  - "解除/终止劳动合同通知书"
+  - "劳动合同"
+  - "工资条"
+  - "银行流水"
+procedure_related:
+  - "劳动仲裁"
+  - "法院诉讼"
+source_id: "labor_contract_law_2012"
+article_ref: "第八十七条"
+review_status: "draft"

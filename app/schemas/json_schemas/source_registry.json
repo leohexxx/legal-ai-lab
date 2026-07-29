@@ -1,0 +1,162 @@
+{
+  "$defs": {
+    "SourceStatus": {
+      "description": "来源效力状态.",
+      "enum": [
+        "active",
+        "amended",
+        "repealed",
+        "draft",
+        "pending_review"
+      ],
+      "title": "SourceStatus",
+      "type": "string"
+    },
+    "SourceType": {
+      "description": "来源类型.",
+      "enum": [
+        "law",
+        "regulation",
+        "local_regulation",
+        "departmental_rule",
+        "judicial_interpretation",
+        "case",
+        "guideline",
+        "secondary"
+      ],
+      "title": "SourceType",
+      "type": "string"
+    }
+  },
+  "description": "来源登记表.\n\n每个法律来源必须记录此信息，确保可回溯。",
+  "properties": {
+    "source_id": {
+      "description": "唯一来源标识符",
+      "examples": [
+        "labor_law_2018"
+      ],
+      "pattern": "^[a-z0-9_-]+$",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "title": {
+      "description": "来源标题",
+      "examples": [
+        "中华人民共和国劳动法"
+      ],
+      "title": "Title",
+      "type": "string"
+    },
+    "issuing_authority": {
+      "description": "发布机关",
+      "examples": [
+        "全国人民代表大会常务委员会"
+      ],
+      "title": "Issuing Authority",
+      "type": "string"
+    },
+    "source_type": {
+      "$ref": "#/$defs/SourceType",
+      "description": "来源类型"
+    },
+    "official_url": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "官方原文 URL",
+      "title": "Official Url"
+    },
+    "publication_date": {
+      "description": "公布日期",
+      "format": "date",
+      "title": "Publication Date",
+      "type": "string"
+    },
+    "effective_date": {
+      "description": "生效日期",
+      "format": "date",
+      "title": "Effective Date",
+      "type": "string"
+    },
+    "status": {
+      "$ref": "#/$defs/SourceStatus",
+      "default": "active",
+      "description": "现行效力状态"
+    },
+    "jurisdiction": {
+      "description": "适用地区",
+      "examples": [
+        "全国",
+        "北京市",
+        "广东省"
+      ],
+      "title": "Jurisdiction",
+      "type": "string"
+    },
+    "retrieved_at": {
+      "description": "检索/采集日期",
+      "format": "date-time",
+      "title": "Retrieved At",
+      "type": "string"
+    },
+    "content_hash": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "正文内容哈希值，用于监测官网变化",
+      "title": "Content Hash"
+    },
+    "supersedes": {
+      "description": "被本文件取代的文件 ID 列表",
+      "items": {
+        "type": "string"
+      },
+      "title": "Supersedes",
+      "type": "array"
+    },
+    "superseded_by": {
+      "description": "取代本文件的文件 ID 列表",
+      "items": {
+        "type": "string"
+      },
+      "title": "Superseded By",
+      "type": "array"
+    },
+    "notes": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "备注",
+      "title": "Notes"
+    }
+  },
+  "required": [
+    "source_id",
+    "title",
+    "issuing_authority",
+    "source_type",
+    "publication_date",
+    "effective_date",
+    "jurisdiction"
+  ],
+  "title": "SourceRegistry",
+  "type": "object"
+}

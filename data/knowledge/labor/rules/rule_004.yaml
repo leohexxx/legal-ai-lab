@@ -1,0 +1,35 @@
+# 规则卡 - 未签劳动合同二倍工资规则
+# 来源：中华人民共和国劳动合同法 第八十二条、劳动合同法实施条例 第六/七条
+# 关联主题：wage_arrears
+
+rule_id: "labor_rule_004"
+title: "未签劳动合同二倍工资规则"
+domain: "labor"
+topic: "wage_arrears"
+jurisdiction: "全国"
+effective_from: "2008-01-01"
+effective_to: null
+status: "active"
+conditions:
+  - "用人单位自用工之日起超过一个月不满一年未与劳动者订立书面劳动合同"
+  - "用人单位违反规定不与劳动者订立无固定期限劳动合同"
+legal_effect: "用人单位自用工之日起超过一个月不满一年未签书面合同的，应当向劳动者每月支付二倍的工资。用人单位违反规定不签无固定期限劳动合同的，自应当订立之日起每月支付二倍工资。"
+exceptions:
+  - "自用工之日起一个月内经用人单位书面通知后，劳动者拒不签合同的，用人单位可终止劳动关系且无需支付经济补偿"
+  - "超过一年未签合同的，视为已订立无固定期限劳动合同，二倍工资计算截止至满一年的前一日"
+facts_required:
+  - "用工起始日期"
+  - "是否已签订书面劳动合同"
+  - "未签订合同的原因（用人单位原因还是劳动者原因）"
+  - "劳动者月工资标准"
+evidence_related:
+  - "劳动合同"
+  - "工资条"
+  - "银行流水"
+  - "录用通知书"
+procedure_related:
+  - "劳动仲裁"
+  - "法院诉讼"
+source_id: "labor_contract_law_2012"
+article_ref: "第八十二条"
+review_status: "draft"

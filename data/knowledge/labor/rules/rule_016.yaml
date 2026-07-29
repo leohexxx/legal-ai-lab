@@ -1,0 +1,32 @@
+# 规则卡 - 工资欠条直接起诉规则
+# 来源：最高人民法院关于审理劳动争议案件适用法律问题的解释（一） 第十五条
+# 关联主题：wage_arrears
+
+rule_id: "labor_rule_016"
+title: "工资欠条直接起诉规则"
+domain: "labor"
+topic: "wage_arrears"
+jurisdiction: "全国"
+effective_from: "2021-01-01"
+effective_to: null
+status: "active"
+conditions:
+  - "劳动者以用人单位出具的工资欠条为证据"
+  - "诉讼请求不涉及劳动关系其他争议"
+legal_effect: "劳动者以用人单位的工资欠条为证据直接提起诉讼，诉讼请求不涉及劳动关系其他争议的，视为拖欠劳动报酬争议，人民法院按照普通民事纠纷受理，无需经过劳动仲裁前置程序。"
+exceptions:
+  - "诉讼请求涉及劳动关系其他争议（如确认劳动关系、经济补偿、赔偿金等）的，仍需先经劳动仲裁"
+facts_required:
+  - "用人单位是否出具了工资欠条"
+  - "欠条记载的欠薪金额和欠薪事实"
+  - "诉讼请求是否仅涉及欠薪"
+evidence_related:
+  - "工资欠条"
+  - "劳动合同"
+  - "银行流水"
+procedure_related:
+  - "法院诉讼（普通民事纠纷）"
+  - "申请支付令"
+source_id: "labor_dispute_interpretation_1_2006"
+article_ref: "第十五条"
+review_status: "draft"

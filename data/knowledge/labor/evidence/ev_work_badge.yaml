@@ -1,0 +1,20 @@
+# 证据卡 - 工作证/工牌
+# 证明劳动关系存在的辅助证据
+# 来源：中华人民共和国劳动合同法 第七条
+
+evidence_id: "ev_work_badge"
+name: "工作证/工牌"
+evidence_type: "physical"
+description: "用人单位向劳动者发放的工作证、工牌、出入证、名片等证明劳动者在该单位工作的身份凭证"
+supports:
+  - "辅助证明劳动关系的存在"
+  - "证明工作岗位和部门"
+  - "证明工作起始时间（工牌上的编号或发证日期）"
+cannot_prove_alone:
+  - "证明约定工资标准"
+  - "证明工资实际发放情况"
+  - "单独作为劳动关系认定的充分证据"
+preservation_tips: "妥善保管工作证、工牌原件，离职时如单位要求归还，建议先拍照留存"
+privacy_risk: "工牌一般不涉及敏感隐私信息"
+domain: "labor"
+topic: "wage_arrears"

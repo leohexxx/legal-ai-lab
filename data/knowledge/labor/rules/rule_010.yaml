@@ -1,0 +1,34 @@
+# 规则卡 - 劳动监察工资支付监督规则
+# 来源：劳动保障监察条例 第十一条、第二十六条
+# 关联主题：wage_arrears
+
+rule_id: "labor_rule_010"
+title: "劳动监察工资支付监督规则"
+domain: "labor"
+topic: "wage_arrears"
+jurisdiction: "全国"
+effective_from: "2004-12-01"
+effective_to: null
+status: "active"
+conditions:
+  - "用人单位存在克扣或无故拖欠工资报酬行为"
+  - "用人单位支付工资低于当地最低工资标准"
+  - "用人单位解除劳动合同未依法给予经济补偿"
+legal_effect: "劳动保障行政部门分别责令限期支付工资报酬、最低工资差额或经济补偿；逾期不支付的，责令按应付金额50%以上1倍以下加付赔偿金。劳动保障监察的追诉时效为2年。"
+exceptions:
+  - "已申请劳动仲裁或提起诉讼的事项，劳动保障行政部门应告知按劳动争议程序处理"
+  - "违法行为超过2年未被发现、举报、投诉的，不再查处"
+facts_required:
+  - "用人单位是否存在违反劳动保障法律的行为"
+  - "违法行为是否在2年追诉期内"
+  - "劳动者是否已申请仲裁或提起诉讼"
+evidence_related:
+  - "劳动合同"
+  - "工资条"
+  - "银行流水"
+  - "考勤记录"
+procedure_related:
+  - "劳动监察投诉"
+source_id: "labor_supervision_regulation_2004"
+article_ref: "第十一条、第二十六条"
+review_status: "draft"

@@ -1,0 +1,40 @@
+rule_id: labor_rule_047
+title: 产检假规则
+domain: labor
+topic: pregnancy_protection
+related_categories:
+- pregnancy_protection
+- maternity_benefits
+- nursing_period
+jurisdiction: 全国
+effective_from: '2012-04-28'
+effective_to: null
+status: active
+conditions:
+- 怀孕女职工在劳动时间内进行产前检查
+- 用人单位将产检时间视为事假或病假扣发工资
+- 用人单位要求女职工用年休假或调休抵冲产检时间
+- 用人单位以女职工频繁产检为由考核扣分或降薪
+legal_effect: 怀孕女职工在劳动时间内进行产前检查，所需时间计入劳动时间，用人单位应当按照正常出勤支付工资，不得按病假、事假或旷工处理。产检假不以次数和时间为限，应根据医疗机构建议合理安排。用人单位将产检时间扣发工资的，应补足差额。将产检视为旷工进而解除劳动合同的，属于违法解除。
+exceptions:
+- 产检假需凭医疗机构出具的产检证明申请
+- 非合理的产检安排（如超出医疗机构建议次数）用人单位可协调处理
+- 女职工应当提前与用人单位沟通产检时间安排
+facts_required:
+- 女职工是否确实进行了产前检查
+- 是否有医疗机构的产检证明
+- 用人单位是否扣发了产检当日的工资
+- 用人单位是否以产检为由进行负面考核
+evidence_related:
+- 产检证明或医院预约记录
+- 考勤记录（显示产检当日被记为缺勤）
+- 工资条（显示产检日被扣薪）
+- 请假沟通记录
+procedure_related:
+- 劳动监察投诉
+- 劳动仲裁（主张工资差额）
+- 法院诉讼
+law_reference:
+  law: 女职工劳动保护特别规定
+  articles:
+  - 第六条

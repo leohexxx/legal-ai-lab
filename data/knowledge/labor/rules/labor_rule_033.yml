@@ -1,0 +1,44 @@
+rule_id: labor_rule_033
+title: 基本养老金计算与领取规则
+domain: labor
+topic: pension
+related_categories:
+- social_insurance_payment
+- pension
+- medical_insurance
+- housing_fund
+jurisdiction: 全国
+effective_from: '2011-07-01'
+effective_to: null
+status: active
+conditions:
+- 个人达到法定退休年龄且累计缴费满十五年
+- 个人因病或非因工致残完全丧失劳动能力
+- 个人在领取基本养老金期间死亡
+- 个人对基本养老金计算标准有异议
+legal_effect: 基本养老金由统筹养老金和个人账户养老金组成。统筹养老金月标准以当地上年度在岗职工月平均工资和本人指数化月平均缴费工资的平均值为基数，缴费每满一年发给百分之一。个人账户养老金月标准为个人账户储存额除以计发月数。国家建立基本养老金正常调整机制，根据职工平均工资增长和物价上涨情况适时提高基本养老保险待遇水平。个人死亡的，个人账户余额可以继承。
+exceptions:
+- 从事井下、高温、有毒有害等特殊工种的，可提前退休
+- 因病或非因工致残完全丧失劳动能力的，可提前退休
+- 个人在服刑期间暂停领取基本养老金，刑满释放后恢复
+facts_required:
+- 法定退休年龄（男60岁/女干部55岁/女工人50岁）
+- 累计缴费年限
+- 本人平均缴费工资指数
+- 当地上年度在岗职工月平均工资
+- 个人账户储存额及计发月数
+evidence_related:
+- 社保缴费记录
+- 退休审批表
+- 个人身份证件
+- 特殊工种证明（如适用）
+procedure_related:
+- 向社保经办机构申请养老金核定
+- 行政复议
+- 行政诉讼
+law_reference:
+  law: 中华人民共和国社会保险法
+  articles:
+  - 第十五条
+  - 第十六条
+  - 第十八条

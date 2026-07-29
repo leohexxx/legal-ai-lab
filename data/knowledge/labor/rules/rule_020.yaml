@@ -1,0 +1,31 @@
+# 规则卡 - 最低工资标准调整规则
+# 来源：最低工资规定 第十条
+# 关联主题：wage_arrears
+
+rule_id: "labor_rule_020"
+title: "最低工资标准调整规则"
+domain: "labor"
+topic: "wage_arrears"
+jurisdiction: "全国"
+effective_from: "2004-03-01"
+effective_to: null
+status: "active"
+conditions:
+  - "最低工资标准发布实施后"
+  - "相关参考因素发生变化"
+legal_effect: "最低工资标准发布实施后，如城镇居民生活费用支出、职工个人缴纳社会保险费、住房公积金、职工平均工资、失业率、经济发展水平等相关因素发生变化，应当适时调整。最低工资标准每两年至少调整一次。"
+exceptions:
+  - "省、自治区、直辖市范围内的不同行政区域可以有不同的最低工资标准"
+  - "月最低工资标准适用于全日制劳动者，小时最低工资标准适用于非全日制劳动者"
+facts_required:
+  - "当地最近一次最低工资标准调整时间"
+  - "距离上次调整是否已满两年"
+  - "当地是否发布了新的最低工资标准"
+evidence_related:
+  - "政府发布的最低工资标准文件"
+  - "政府公报"
+procedure_related:
+  - "劳动监察投诉"
+source_id: "minimum_wage_regulation_2004"
+article_ref: "第十条"
+review_status: "draft"

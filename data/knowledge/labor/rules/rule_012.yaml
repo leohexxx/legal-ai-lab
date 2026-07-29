@@ -1,0 +1,36 @@
+# 规则卡 - 试用期工资最低标准规则
+# 来源：中华人民共和国劳动合同法 第二十条、劳动合同法实施条例 第十五条
+# 关联主题：wage_arrears
+
+rule_id: "labor_rule_012"
+title: "试用期工资最低标准规则"
+domain: "labor"
+topic: "wage_arrears"
+jurisdiction: "全国"
+effective_from: "2008-01-01"
+effective_to: null
+status: "active"
+conditions:
+  - "用人单位与劳动者约定试用期"
+  - "劳动者处于试用期内"
+legal_effect: "劳动者在试用期的工资不得低于本单位相同岗位最低档工资的80%或者劳动合同约定工资的80%，并不得低于用人单位所在地的最低工资标准。"
+exceptions:
+  - "试用期不成立（仅约定试用期的劳动合同）的，该期限为劳动合同期限"
+  - "以完成一定工作任务为期限的劳动合同或合同期限不满三个月的，不得约定试用期"
+facts_required:
+  - "劳动合同约定的试用期"
+  - "本单位相同岗位最低档工资"
+  - "劳动合同约定工资"
+  - "用人单位所在地最低工资标准"
+  - "试用期实际支付工资数额"
+evidence_related:
+  - "劳动合同"
+  - "工资条"
+  - "银行流水"
+  - "单位薪酬制度"
+procedure_related:
+  - "劳动仲裁"
+  - "法院诉讼"
+source_id: "labor_contract_law_2012"
+article_ref: "第二十条"
+review_status: "draft"

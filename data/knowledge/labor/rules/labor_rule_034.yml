@@ -1,0 +1,46 @@
+rule_id: labor_rule_034
+title: 社会保险费补缴规则
+domain: labor
+topic: social_insurance_payment
+related_categories:
+- social_insurance_payment
+- pension
+- medical_insurance
+- housing_fund
+jurisdiction: 全国
+effective_from: '2011-07-01'
+effective_to: null
+status: active
+conditions:
+- 用人单位未依法为劳动者缴纳社会保险费
+- 用人单位未按时足额缴纳社会保险费
+- 用人单位申报的社会保险缴费基数低于实际工资
+- 用人单位经责令后逾期仍不缴纳社保费
+legal_effect: 用人单位未按时足额缴纳社会保险费的，由社会保险费征收机构责令限期缴纳或者补足，并自欠缴之日起按日加收万分之五的滞纳金；逾期仍不缴纳的，由有关行政部门处欠缴数额一倍以上三倍以下的罚款。用人单位未足额缴纳导致劳动者无法享受社保待遇的，应承担相应的赔偿责任。劳动者可据此解除劳动合同并要求经济补偿。
+exceptions:
+- 因不可抗力等法定事由导致无法按时缴纳的，可申请缓缴
+- 用人单位破产或吊销执照的，社保欠费在清算中优先清偿
+- 超过法定追缴期限的（各地对社保补缴有不同期限规定）
+facts_required:
+- 用人单位是否办理了社保登记
+- 实际工资和申报缴费基数
+- 欠缴的社保种类和时段
+- 劳动者是否已受损失（如无法报销医疗费）
+- 劳动监察或社保部门是否已责令改正
+evidence_related:
+- 社保缴费记录
+- 劳动合同
+- 工资条
+- 银行流水
+- 社会保险费征收机构出具的欠缴证明
+- 劳动监察责令改正通知书
+procedure_related:
+- 向社会保险费征收机构投诉
+- 劳动监察投诉
+- 劳动仲裁（主张解除合同及经济补偿）
+- 法院诉讼
+law_reference:
+  law: 中华人民共和国社会保险法
+  articles:
+  - 第六十条
+  - 第八十六条

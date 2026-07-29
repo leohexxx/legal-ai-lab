@@ -1,0 +1,37 @@
+rule_id: labor_rule_043
+title: 竞业限制期限与范围规则
+domain: labor
+topic: non_compete_agreement
+related_categories:
+- non_compete_agreement
+- non_compete_compensation
+jurisdiction: 全国
+effective_from: '2008-01-01'
+effective_to: null
+status: active
+conditions:
+- 竞业限制协议约定的限制期限超过二年
+- 竞业限制协议约定的限制范围过于宽泛
+- 竞业限制协议约定的地域限制不合理
+- 劳动者认为竞业限制范围超出合理边界
+legal_effect: 竞业限制期限不得超过二年，超过二年的部分对劳动者不发生效力。竞业限制的范围应当以与本单位生产或者经营同类产品、从事同类业务的有竞争关系的其他用人单位为限，不应无限制扩大到所有同行业企业。地域限制应当在用人单位业务所及的地域范围内合理设定。限制范围、地域、期限不得违反法律法规的规定。超出合理范围的竞业限制条款，仲裁机构或法院可以调整或认定无效。
+exceptions:
+- 用人单位可在劳动者离职时书面通知解除竞业限制协议
+- 劳动者违反竞业限制的，用人单位可要求继续履行并承担违约责任
+- 用人单位超过三个月未支付经济补偿的，劳动者可请求解除竞业限制约定
+facts_required:
+- 竞业限制协议约定的具体限制期限
+- 限制的行业范围和地域范围
+- 劳动者新入职单位是否与原单位存在竞争关系
+- 协议约定的期限是否超过二年
+evidence_related:
+- 竞业限制协议
+- 新单位的营业执照或经营范围
+- 新旧单位竞争关系证明
+procedure_related:
+- 劳动仲裁（确认限制期限或范围效力）
+- 法院诉讼
+law_reference:
+  law: 中华人民共和国劳动合同法
+  articles:
+  - 第二十四条

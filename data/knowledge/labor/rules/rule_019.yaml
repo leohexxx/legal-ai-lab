@@ -1,0 +1,36 @@
+# 规则卡 - 劳动者因欠薪解除合同规则
+# 来源：中华人民共和国劳动合同法 第三十八条
+# 关联主题：wage_arrears
+
+rule_id: "labor_rule_019"
+title: "劳动者因欠薪解除劳动合同规则"
+domain: "labor"
+topic: "wage_arrears"
+jurisdiction: "全国"
+effective_from: "2008-01-01"
+effective_to: null
+status: "active"
+conditions:
+  - "用人单位未及时足额支付劳动报酬"
+  - "劳动者以此为由解除劳动合同"
+legal_effect: "用人单位未及时足额支付劳动报酬的，劳动者可以解除劳动合同。劳动者以此为由解除合同的，无需提前30日通知，可随时解除，且用人单位应当依法支付经济补偿。"
+exceptions:
+  - "劳动者不能以此为由解除的情形：用人单位因客观原因暂时无法支付且有正当理由的，需个案判断"
+  - "劳动者依本条解除后，仍可主张其他赔偿"
+facts_required:
+  - "用人单位是否存在未及时足额支付劳动报酬的事实"
+  - "劳动者是否明确以欠薪为由提出解除"
+  - "劳动者在本单位的工作年限"
+  - "解除前十二个月的月平均工资"
+evidence_related:
+  - "劳动合同"
+  - "解除劳动合同通知书"
+  - "工资条"
+  - "银行流水"
+  - "聊天记录（证明催讨工资）"
+procedure_related:
+  - "劳动仲裁"
+  - "法院诉讼"
+source_id: "labor_contract_law_2012"
+article_ref: "第三十八条"
+review_status: "draft"

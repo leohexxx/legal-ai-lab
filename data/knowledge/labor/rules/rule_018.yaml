@@ -1,0 +1,33 @@
+# 规则卡 - 劳动合同解除后经济补偿与工作交接规则
+# 来源：中华人民共和国劳动合同法 第五十条、劳动合同法实施条例 第二十四条
+# 关联主题：wage_arrears
+
+rule_id: "labor_rule_018"
+title: "劳动合同解除后经济补偿与工作交接规则"
+domain: "labor"
+topic: "wage_arrears"
+jurisdiction: "全国"
+effective_from: "2008-01-01"
+effective_to: null
+status: "active"
+conditions:
+  - "劳动合同解除或终止"
+  - "用人单位依法应向劳动者支付经济补偿"
+legal_effect: "用人单位在解除或终止劳动合同时应出具证明，并在15日内为劳动者办理档案和社会保险关系转移手续。劳动者应办理工作交接，经济补偿在办结工作交接时支付。解除或终止的劳动合同文本至少保存二年备查。解除证明应写明合同期限、解除日期、工作岗位、在本单位的工作年限。"
+exceptions:
+  - "劳动者不配合办理工作交接的，用人单位可暂缓支付经济补偿"
+facts_required:
+  - "劳动合同解除或终止的事实"
+  - "用人单位是否出具了解除/终止证明"
+  - "用人单位是否办理了档案和社保转移手续"
+  - "经济补偿是否已支付"
+evidence_related:
+  - "解除/终止劳动合同证明"
+  - "工作交接清单"
+  - "经济补偿支付记录"
+procedure_related:
+  - "劳动仲裁"
+  - "法院诉讼"
+source_id: "labor_contract_law_2012"
+article_ref: "第五十条"
+review_status: "draft"

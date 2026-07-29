@@ -1,0 +1,43 @@
+rule_id: labor_rule_038
+title: 停工留薪期待遇规则
+domain: labor
+topic: death_compensation
+related_categories:
+- injury_identification
+- disability_grade
+- lump_sum_compensation
+- death_compensation
+jurisdiction: 全国
+effective_from: '2011-01-01'
+effective_to: null
+status: active
+conditions:
+- 职工因工作遭受事故伤害需要暂停工作接受工伤医疗
+- 职工患职业病需要暂停工作接受治疗
+- 停工留薪期满后仍需治疗
+- 停工留薪期内评定伤残等级后
+legal_effect: 职工因工作遭受事故伤害或者患职业病需要暂停工作接受工伤医疗的，在停工留薪期内，原工资福利待遇不变，由用人单位按月支付。停工留薪期一般不超过12个月。伤情严重或者情况特殊，经设区的市级劳动能力鉴定委员会确认，可以适当延长，但延长不得超过12个月。生活不能自理的工伤职工在停工留薪期需要护理的，由所在单位负责。停工留薪期满后仍需治疗的，继续享受工伤医疗待遇。评定伤残等级后，停发原待遇，按规定享受伤残待遇。
+exceptions:
+- 停工留薪期延长需经劳动能力鉴定委员会确认
+- 停工留薪期满后仍需治疗的，继续享受工伤医疗待遇
+- 评定伤残等级后停发原待遇改为享受伤残津贴
+facts_required:
+- 工伤认定决定书
+- 医疗机构出具的休假证明
+- 停工留薪期的起止时间
+- 受伤前12个月的月平均工资
+- 是否已评定伤残等级
+evidence_related:
+- 工伤认定决定书
+- 医院诊断证明/休假证明
+- 病历
+- 劳动合同
+- 工资条（证明停工留薪期工资）
+procedure_related:
+- 劳动能力鉴定（申请延长停工留薪期）
+- 劳动仲裁（主张停工留薪期待遇）
+- 法院诉讼
+law_reference:
+  law: 工伤保险条例
+  articles:
+  - 第三十三条

@@ -1,0 +1,102 @@
+classDiagram
+    class ChatMessage {
+        +string id
+        +MessageRole role
+        +string content
+        +string createdAt
+        +IntentResult intent
+        +FollowUpField[] fields
+        +boolean isLoading
+    }
+
+    class IntentResult {
+        +string categoryId
+        +string level1
+        +string level2
+        +float confidence
+        +string[] extractedKeywords
+        +string summary
+        +AlternativeCategory[] alternativeCategories
+    }
+
+    class FollowUpField {
+        +string fieldId
+        +string label
+        +FieldType type
+        +Option[] options
+        +boolean required
+        +string userResponse
+    }
+
+    class KnowledgeCategory {
+        +string categoryId
+        +string level1
+        +string level2
+        +string displayName
+        +string[] keywords
+        +string[] requiredFields
+        +LawReference[] relevantLaws
+        +string[] excludeFrom
+    }
+
+    class LawReference {
+        +string law
+        +string[] articles
+        +string summary
+        +string content
+    }
+
+    class ChatStore {
+        +ChatMessage[] messages
+        +string contextId
+        +IntentResult currentIntent
+        +boolean isConfirmed
+        +boolean isLoading
+        +Record~string, string~ collectedFields
+        +sendMessage(text) void
+        +confirmIntent() void
+        +correctIntent(newCategoryId) void
+        +skipFollowUp() void
+        +resetChat() void
+    }
+
+    class ChatService {
+        +identifyIntent(message, categories) IntentResult
+        +askFollowUp(message, contextId, categoryId, fields) AskResponse
+        +skipAndGenerate(contextId, categoryId, fields) SkipResponse
+    }
+
+    class KnowledgeService {
+        +loadGraph() KnowledgeCategory[]
+        +getCategoryById(id) KnowledgeCategory
+        +getCategoryFields(id) FollowUpField[]
+        +search(query) LawReference[]
+    }
+
+    class ApiResponse~T~ {
+        +int code
+        +T data
+        +string message
+    }
+
+    class IdentifyRequest {
+        +string message
+    }
+
+    class AskResponse {
+        +string message
+        +IntentResult intent
+        +FollowUpField[] fields
+        +boolean isComplete
+    }
+
+    ChatMessage --> IntentResult : contains
+    ChatMessage --> FollowUpField : contains
+    ChatStore --> ChatMessage : manages[]
+    ChatStore --> IntentResult : tracks
+    ChatService --> KnowledgeCategory : uses
+    ChatService --> KnowledgeService : queries
+    KnowledgeService --> KnowledgeCategory : manages[]
+    ApiResponse --> IntentResult : wraps
+    ApiResponse --> KnowledgeCategory : wraps
+    ApiResponse --> AskResponse : wraps

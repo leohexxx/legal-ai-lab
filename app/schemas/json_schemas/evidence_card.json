@@ -1,0 +1,104 @@
+{
+  "description": "证据卡.\n\n说明某类证据可以支持什么、不能单独证明什么、\n如何保存以及隐私风险。",
+  "properties": {
+    "evidence_id": {
+      "description": "证据唯一标识",
+      "pattern": "^ev_[a-z0-9_]+$",
+      "title": "Evidence Id",
+      "type": "string"
+    },
+    "name": {
+      "description": "证据名称",
+      "examples": [
+        "银行流水"
+      ],
+      "title": "Name",
+      "type": "string"
+    },
+    "evidence_type": {
+      "description": "证据类型",
+      "examples": [
+        "document",
+        "electronic",
+        "witness",
+        "physical"
+      ],
+      "title": "Evidence Type",
+      "type": "string"
+    },
+    "description": {
+      "description": "简要说明",
+      "title": "Description",
+      "type": "string"
+    },
+    "supports": {
+      "description": "能证明的事实列表",
+      "items": {
+        "type": "string"
+      },
+      "title": "Supports",
+      "type": "array"
+    },
+    "cannot_prove_alone": {
+      "description": "不能单独证明的事项",
+      "items": {
+        "type": "string"
+      },
+      "title": "Cannot Prove Alone",
+      "type": "array"
+    },
+    "preservation_tips": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "保存建议",
+      "title": "Preservation Tips"
+    },
+    "privacy_risks": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "隐私风险提示",
+      "title": "Privacy Risks"
+    },
+    "domain": {
+      "description": "所属法律领域",
+      "title": "Domain",
+      "type": "string"
+    },
+    "topic": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "所属主题",
+      "title": "Topic"
+    }
+  },
+  "required": [
+    "evidence_id",
+    "name",
+    "evidence_type",
+    "description",
+    "domain"
+  ],
+  "title": "EvidenceCard",
+  "type": "object"
+}

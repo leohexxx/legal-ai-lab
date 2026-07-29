@@ -1,0 +1,46 @@
+rule_id: labor_rule_039
+title: 婚丧假天数及工资待遇规则
+domain: labor
+topic: marriage_funeral_leave
+related_categories:
+- annual_leave
+- sick_personal_leave
+- marriage_funeral_leave
+- maternity_paternity_leave
+jurisdiction: 全国
+effective_from: '1980-02-20'
+effective_to: null
+status: active
+conditions:
+- 劳动者本人结婚需要请婚假
+- 劳动者的直系亲属（父母、配偶、子女）死亡需要请丧假
+- 劳动者的岳父母或公婆死亡需要请丧假
+- 婚丧假期间需要赴外地料理
+- 用人单位拒绝批准婚丧假或扣发婚丧假期间工资
+legal_effect: 职工本人结婚或职工的直系亲属（父母、配偶和子女）死亡时，可以根据具体情况由单位行政领导批准，酌情给予一至三天的婚丧假。职工结婚时双方不在一地工作的，职工在外地的直系亲属死亡时需要职工本人去外地料理丧事的，都可以根据路程远近另给路程假。婚丧假和路程假期间，职工的工资照发。途中车船费等由职工自理。目前各地陆续延长婚假天数（如北京10天、上海10天、广东3天等），以各省人口与计划生育条例为准。
+exceptions:
+- 各地对婚假有延长规定的，按当地规定执行（如北京10天、上海10天、广东3天）
+- 路程假根据实际需要另给，不包含在基本婚丧假天数内
+- 职工的岳父母或公婆死亡需要职工料理后事的，单位可批准丧假
+facts_required:
+- 请假事由（结婚/直系亲属死亡）
+- 请假天数及实际休假天数
+- 用人单位是否批准请假
+- 用人单位是否扣发休假期间工资
+- 当地对婚丧假的特别规定
+evidence_related:
+- 结婚证
+- 死亡证明
+- 请假审批记录
+- 考勤记录
+- 工资条（证明休假期间工资发放情况）
+procedure_related:
+- 劳动仲裁（主张婚丧假工资）
+- 劳动监察投诉
+- 法院诉讼
+law_reference:
+  law: 国家劳动总局、财政部关于国营企业职工请婚丧假和路程假问题的通知
+  articles:
+  - 第一条
+  - 第二条
+  - 第三条

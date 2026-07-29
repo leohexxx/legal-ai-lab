@@ -1,0 +1,47 @@
+rule_id: labor_rule_029
+title: 非全日制用工规则
+domain: labor
+topic: part_time
+related_categories:
+- de_facto_relation
+- dual_relation
+- dispatch
+- part_time
+- labor_outstaffing
+jurisdiction: 全国
+effective_from: '2008-01-01'
+effective_to: null
+status: active
+conditions:
+- 劳动者在同一用人单位每日工作时间不超过四小时
+- 劳动者在同一用人单位每周工作时间累计不超过二十四小时
+- 用人单位与非全日制劳动者约定试用期
+- 非全日制劳动者的工资支付周期超过十五日
+legal_effect: 非全日制用工是指以小时计酬为主，劳动者在同一用人单位一般平均每日工作时间不超过四小时，每周工作时间累计不超过二十四小时的用工形式。非全日制用工双方当事人可以订立口头协议，不得约定试用期，任何一方可以随时通知对方终止用工且用人单位无需支付经济补偿。小时计酬标准不得低于用人单位所在地最低小时工资标准，工资结算支付周期最长不得超过十五日。
+exceptions:
+- 劳动者可以与多个用人单位订立非全日制劳动合同，但后订立的不得影响先订立合同的履行
+- 用人单位终止非全日制用工无需支付经济补偿
+- 非全日制用工的社保缴纳按各地规定执行（一般仅缴纳工伤保险）
+facts_required:
+- 劳动者每日工作时长及每周累计时长
+- 计酬方式及小时工资标准
+- 工资支付周期
+- 是否约定了试用期
+- 劳动合同是否为书面形式
+evidence_related:
+- 劳动合同（如有）
+- 考勤记录（证明工作时长）
+- 工资条
+- 银行流水
+- 工作安排记录
+procedure_related:
+- 劳动仲裁（确认用工形式性质）
+- 法院诉讼
+law_reference:
+  law: 中华人民共和国劳动合同法
+  articles:
+  - 第六十八条
+  - 第六十九条
+  - 第七十条
+  - 第七十一条
+  - 第七十二条

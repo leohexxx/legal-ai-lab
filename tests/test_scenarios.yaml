@@ -1,0 +1,191 @@
+# 欠薪 MVP 结构化测试场景
+#
+# 参考 05-MVP/Test_Cases.md 转换为机器可读格式。
+# 用于自动化评测：信息采集完整度、引用准确性、风险提示等。
+
+test_cases:
+
+  - id: TC-01
+    title: 单月工资未支付
+    initial_input: "公司上个月工资还没发。"
+    scenario: wage_arrears
+    required_fields:
+      - employer_name
+      - work_location
+      - pay_cycle
+      - period
+      - amount_expected
+      - amount_paid
+      - employment_status
+      - employer_contacted
+    must_check:
+      - 不直接给结论
+      - 先确认工资对应期间
+      - 区分是否只是延迟到账
+    must_not:
+      - 编造法规
+      - 把推断写成确认事实
+    pass_criteria:
+      - "先确定欠薪期间和金额后才给出法律信息"
+      - "如果金额和期间不明确，追问后再输出"
+
+  - id: TC-02
+    title: 连续多月欠薪且部分支付
+    initial_input: "三个月只发了一部分工资。"
+    scenario: wage_arrears
+    required_fields:
+      - period
+      - amount_expected
+      - amount_paid
+      - salary_components
+      - employer_response
+    must_check:
+      - 按月份生成欠薪明细
+      - 不合并成无法核对的总额
+    must_not:
+      - 只记录总金额不分期间
+    pass_criteria:
+      - "按期间生成应付与实付对比"
+      - "展示每月差额明细"
+
+  - id: TC-03
+    title: 没有书面劳动合同
+    initial_input: "没签合同，老板还欠我工资。"
+    scenario: wage_arrears
+    required_fields:
+      - start_date
+      - employment_status
+      - work_manager
+      - salary_payer
+    optional_fields:
+      - contract_available
+      - attendance_records
+      - communications
+    must_check:
+      - 不因无书面合同停止流程
+      - 提示盘点实际工作关系的证据
+    must_not:
+      - 以"无合同"为由拒接案件
+    pass_criteria:
+      - "提示可通过工资支付记录、考勤、聊天记录等证明事实劳动关系"
+
+  - id: TC-04
+    title: 现金发薪、缺少银行流水
+    initial_input: "以前都是现金发工资，现在老板说已经给过了。"
+    scenario: wage_arrears
+    required_fields:
+      - employer_name
+      - period
+      - amount_expected
+      - amount_paid
+      - disputed_by_employer
+    must_check:
+      - 将支付事实标为争议项
+      - 提示可用其他证据佐证
+    must_not:
+      - 擅自认定任何一方陈述为真
+    pass_criteria:
+      - "标记为争议项并建议收集工资签收记录、聊天记录等"
+
+  - id: TC-05
+    title: 合同主体与实际管理主体不同
+    initial_input: "合同是 A 公司签的，但一直在 B 公司上班，工资也是 B 发。"
+    scenario: wage_arrears
+    required_fields:
+      - contract_entity
+      - salary_payer
+      - work_manager
+      - work_location
+    must_check:
+      - 明确标记主体可能不一致
+      - 建议专业核验
+    must_not:
+      - 自行确定责任主体
+    pass_criteria:
+      - "展示主体不一致的情况，建议咨询律师确定被申请人/被告"
+
+  - id: TC-06
+    title: 提成金额存在争议
+    initial_input: "公司不发我的销售提成。"
+    scenario: wage_arrears
+    required_fields:
+      - agreed_salary
+      - salary_components
+      - employer_response
+      - period
+    must_check:
+      - 提成规则、完成情况、结算条件
+      - 展示计算依据与待核实条件
+    must_not:
+      - 将用户估算直接作为确定欠款
+    pass_criteria:
+      - "区分确定欠款和待核实部分"
+
+  - id: TC-07
+    title: 已离职后主张欠薪
+    initial_input: "我离职半年了，公司还欠最后一个月工资。"
+    scenario: wage_arrears
+    required_fields:
+      - start_date
+      - end_date
+      - departure_type
+      - external_actions
+      - known_deadlines
+    must_check:
+      - 识别时效重要性
+      - 收集离职方式和结算状态
+    must_not:
+      - 擅自推定具体时效期限
+    pass_criteria:
+      - "提示仲裁时效风险，但具体期限基于已核验资料展示"
+
+  - id: TC-08
+    title: 用户只提供模糊总金额
+    initial_input: "公司大概欠我两万多。"
+    scenario: wage_arrears
+    required_fields:
+      - period
+      - agreed_salary
+      - amount_expected
+      - amount_paid
+    must_check:
+      - 金额标为估算值
+      - 帮助用户按期间重建明细
+    must_not:
+      - 把估算值作为确定欠款输出
+    pass_criteria:
+      - "金额标注为'待核实'，并询问具体期间和工资标准"
+
+  - id: TC-09
+    title: 混合多个劳动争议
+    initial_input: "公司欠工资、没交社保，还把我辞退了。"
+    scenario: wage_arrears
+    required_fields:
+      - primary_goal
+      - urgent_concern
+      - employer_name
+      - period
+    must_check:
+      - 仍以欠薪为主流程
+      - 将其他问题标为相关子问题
+    must_not:
+      - 一次生成未经核验的综合结论
+    pass_criteria:
+      - "明确主次问题，分别提示各问题的不同处理路径"
+
+  - id: TC-10
+    title: 不属于劳动关系的可能场景
+    initial_input: "我是接项目的，公司一直没付尾款。"
+    scenario: wage_arrears
+    required_fields:
+      - employer_name
+      - contract_entity
+      - work_manager
+    must_check:
+      - 不依据合同标题判断
+      - 信息不足时标为待分类
+    must_not:
+      - 强行进入欠薪模板
+      - 按劳动争议处理
+    pass_criteria:
+      - "提示可能不属于劳动关系，建议先确认法律关系性质"

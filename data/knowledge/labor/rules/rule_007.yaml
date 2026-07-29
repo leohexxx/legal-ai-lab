@@ -1,0 +1,38 @@
+# 规则卡 - 欠薪加付赔偿金规则
+# 来源：中华人民共和国劳动合同法 第八十五条、劳动保障监察条例 第二十六条
+# 关联主题：wage_arrears
+
+rule_id: "labor_rule_007"
+title: "欠薪加付赔偿金规则"
+domain: "labor"
+topic: "wage_arrears"
+jurisdiction: "全国"
+effective_from: "2008-01-01"
+effective_to: null
+status: "active"
+conditions:
+  - "用人单位未按约定或国家规定及时足额支付劳动报酬"
+  - "用人单位支付工资低于当地最低工资标准"
+  - "用人单位安排加班不支付加班费"
+  - "用人单位解除或终止劳动合同未依法支付经济补偿"
+  - "经劳动行政部门责令限期支付后逾期仍不支付"
+legal_effect: "由劳动行政部门责令限期支付劳动报酬、加班费或经济补偿；逾期不支付的，责令按应付金额50%至100%的标准加付赔偿金。"
+exceptions:
+  - "用人单位在责令期限内主动支付的，不适用加付赔偿金"
+facts_required:
+  - "是否存在未足额支付劳动报酬的情形"
+  - "劳动行政部门是否已作出责令支付决定"
+  - "用人单位是否在责令期限内支付"
+  - "应付金额的数额"
+evidence_related:
+  - "劳动合同"
+  - "工资条"
+  - "银行流水"
+  - "劳动监察责令改正通知书"
+procedure_related:
+  - "劳动监察投诉"
+  - "劳动仲裁"
+  - "法院诉讼"
+source_id: "labor_contract_law_2012"
+article_ref: "第八十五条"
+review_status: "draft"
